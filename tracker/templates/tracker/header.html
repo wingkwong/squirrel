@@ -32,25 +32,17 @@
             <ul class="nav navbar-nav">
                 <li class="active">
                     <a href="{% url 'tracker:expense' %}">
-                        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp; Expense
+                        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp; Expense Overview
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'tracker:create_expense' %}">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Expense
                     </a>
                 </li>
                 <li>
                     <a href="{% url 'tracker:analysis' %}">
-                        <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp; Analysis
-                    </a>
-                </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                    <a href="{% url 'tracker:create_expense' %}">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add expense
-                    </a>
-                </li>
-                <li class="">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                        <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp; Expense Analysis
                     </a>
                 </li>
             </ul>
