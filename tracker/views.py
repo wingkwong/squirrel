@@ -1,14 +1,15 @@
-from django.shortcuts import render, get_object_or_404
+from django.views import generic
 from .models import Expense
 
 
-def index(request):
-    records = Expense.objects.all()
-    return render(request, 'tracker/index.html', {
-        'records': records
-    })
+class IndexView(generic.ListView):
+    template_name = "tracker/index.html"
+    context_object_name = "records"
+
+    def get_queryset(self):
+        return Expense.objects.all()
 
 
-def detail(request, expense_id):
-    records = get_object_or_404(Expense, pk=expense_id)
-    return render(request, 'tracker/detail.html', {'records': records})
+class DetailView(generic.ListView):
+    model = Expense
+    template_name = "tracker/detail.html"
