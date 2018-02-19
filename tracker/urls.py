@@ -5,8 +5,8 @@ app_name = 'tracker'
 
 urlpatterns = [
     # /tracker
-    path('', views.index, name ="index"),
+    path('', views.IndexView.as_view(), name ="index"),
 
     # /tracker/{id}
-    path('<int:expense_id>', views.detail, name="detail")
+    path('<int:expense_id>', views.DetailView.as_view(), name="detail")
 ]
