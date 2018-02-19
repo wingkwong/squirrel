@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <title>Expense Tracker</title>
     {% load staticfiles %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    {% load bootstrap3 %}
+
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+    {% bootstrap_javascript %}
+    <script src="{% static 'main.js' %}"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script" rel="stylesheet">
+    {% bootstrap_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}" />
-    <script
-      src="http://code.jquery.com/jquery-2.2.4.min.js"
-      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-      crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
     <nav class="navbar navbar-inverse">
@@ -49,7 +51,9 @@
         </div>
     </div>
 </nav>
-    {% block body %}
-    {% endblock %}
+    <div class="container">
+        {% block body %}
+        {% endblock %}
+    </div>
 </body>
 </html>
