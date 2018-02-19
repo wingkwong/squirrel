@@ -1,6 +1,77 @@
+/*
+    Header
+*/
+
 .navbar{
     border-radius: 0;
 }
 .navbar-brand{
     font-family: 'Nanum Pen Script', cursive;
+}
+
+/*
+    Django Table2
+*/
+
+
+.delete_expense_form{
+    display: inline;
+}
+
+
+/*
+    Filter Panel
+*/
+
+.filterPanel {
+    color: #ffffff;
+    text-align: center;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 100px;
+    transition: 0.5s;
+}
+
+.filterPanel .control-group{
+    margin: 20px;
+}
+
+.filterPanel a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
+    transition: 0.3s;
+}
+
+.filterPanel .controls input{
+    color: #000000;
+}
+
+.filterPanel a:hover {
+    color: #f1f1f1;
+}
+
+.filterPanel .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+@media screen and (max-height: 450px) {
+    .filterPanel {padding-top: 15px;}
+    .filterPanel a {font-size: 18px;}
 }
