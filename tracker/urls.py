@@ -17,5 +17,8 @@ urlpatterns = [
     path('delete/<int:pk>', views.ExpenseDelete.as_view(), name="delete_expense"),
 
     # /analysis
-    path('analysis', views.AnalysisView.as_view(), name="analysis")
+    path('analysis', views.AnalysisView.as_view(), name="analysis"),
+
+    # /analysis
+    path('api/expense/', views.AnalysisView.get_expense_data, name="api-expense")
 ]
