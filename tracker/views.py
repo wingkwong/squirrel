@@ -2,6 +2,8 @@ from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django_tables2 import RequestConfig
+from django.http import JsonResponse
+from django.core import serializers
 from .tables import ExpenseTable
 from .models import Expense
 from .forms import ExpenseTableHelper
@@ -65,3 +67,8 @@ class AnalysisView(generic.ListView):
 
     def get_queryset(self):
         return Expense.objects.all()
+
+    def get_expense_data(request, *args, **kwargs):
+        json = serializers.serialize("json", Expense.objects.all())
+        data = {"expense": json}
+        return JsonResponse(data)
