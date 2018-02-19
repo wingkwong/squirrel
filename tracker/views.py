@@ -1,9 +1,14 @@
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from .models import Expense
 
 
 def index(request):
-    return HttpResponse("<h1>Hello World</h1>")
+    records = Expense.objects.all()
+    return render(request, 'tracker/index.html', {
+        'records': records
+    })
 
 
 def detail(request, expense_id):
-    return HttpResponse("<h2>Detail page for id: " + str(expense_id) + "</h2>")
+    records = get_object_or_404(Expense, pk=expense_id)
+    return render(request, 'tracker/detail.html', {'records': records})
