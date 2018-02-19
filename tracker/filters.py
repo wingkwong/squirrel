@@ -7,9 +7,9 @@ class ExpenseFilter(django_filters.FilterSet):
         model = Expense
         fields = (
             'currency',
-             'description',
-             'type',
-             'payment',
-             'amount',
-             'date'
+            'description',
+            'type',
+            'payment',
+            'amount',
+            'date'
         )
