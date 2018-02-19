@@ -16,4 +16,4 @@ class Expense(models.Model):
         ordering = ['-id']
 
     def get_absolute_url(self):
-        return reverse('tracker:detail', kwargs={'pk': self.pk})
+        return reverse('tracker:expense')
