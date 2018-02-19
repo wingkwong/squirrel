@@ -7,7 +7,7 @@ class Expense(models.Model):
     description = models.CharField(max_length=1000, null=True)
     type = models.CharField(max_length=30)
     payment = models.CharField(max_length=30)
-    amount = models.IntegerField()
+    amount = models.FloatField()
     date = models.DateField()
 
     class Meta:
