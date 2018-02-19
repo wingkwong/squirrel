@@ -14,8 +14,8 @@ urlpatterns = [
     path('add', views.ExpenseCreate.as_view(), name="create_expense"),
 
     # /tracker/update/{id}
-        path('update/<int:pk>', views.ExpenseUpdate.as_view(), name="update_expense"),
+    path('update/<int:pk>', views.ExpenseUpdate.as_view(), name="update_expense"),
 
     # /tracker/delete/{id}
-        path('delete/<int:pk>', views.ExpenseDelete.as_view(), name="delete_expense"),
+    path('delete/<int:pk>', views.ExpenseDelete.as_view(), name="delete_expense"),
 ]

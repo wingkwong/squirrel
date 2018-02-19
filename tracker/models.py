@@ -10,5 +10,10 @@ class Expense(models.Model):
     amount = models.IntegerField()
     date = models.DateField()
 
+    class Meta:
+        verbose_name = 'Expense'
+        verbose_name_plural = 'Expenses'
+        ordering = ['-id']
+
     def get_absolute_url(self):
         return reverse('tracker:detail', kwargs={'pk': self.pk})
