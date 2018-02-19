@@ -9,7 +9,6 @@ class ExpenseFilter(django_filters.FilterSet):
     payment = django_filters.CharFilter(lookup_expr='icontains')
     amount = django_filters.CharFilter(lookup_expr='icontains')
 
-
     class Meta:
         model = Expense
         fields = (
