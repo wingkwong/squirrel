@@ -24,14 +24,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'tracker:index' %}">Expense Tracker</a>
+            <a class="navbar-brand" href="{% url 'tracker:expense' %}">Expense Tracker</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="{% url 'tracker:index' %}">
+                    <a href="{% url 'tracker:expense' %}">
                         <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp; Expense
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'tracker:analysis' %}">
+                        <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp; Analysis
                     </a>
                 </li>
             </ul>

@@ -5,7 +5,7 @@ app_name = 'tracker'
 
 urlpatterns = [
     # /
-    path('', views.IndexView.as_view(), name ="index"),
+    path('', views.IndexView.as_view(), name ="expense"),
 
     # /add
     path('add', views.ExpenseCreate.as_view(), name="create_expense"),
