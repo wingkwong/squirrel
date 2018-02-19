@@ -52,6 +52,7 @@
 
 .filterPanel .controls input{
     color: #000000;
+    text-align: center;
 }
 
 .filterPanel a:hover {
@@ -64,6 +65,7 @@
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+    color: #ffffff;
 }
 
 #main {
