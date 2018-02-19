@@ -6,8 +6,9 @@
 
 
 {% block body %}
+<div class="container expense-overview">
 {% buttons %}
-    <button type="submit" class="btn btn-success" onclick="openFilterPanel()">
+    <button type="submit" class="open-filter-btn btn btn-success">
       {% bootstrap_icon "search" %} Filter
     </button>
   {% endbuttons %}
@@ -17,7 +18,7 @@
     {% render_table table %}
 
 <div id="filterPanel" class="filterPanel">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeFilterPanel()">&times;</a>
+  <a href="javascript:void(0)" class="closebtn">&times;</a>
       <form action="" method="get">
     {% crispy filter.form filter.form.helper %}
     </form>
@@ -71,3 +72,4 @@
     <!--{% endif %}-->
 
 {% endblock %}
+</div>
