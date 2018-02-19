@@ -29,12 +29,6 @@ class IndexView(generic.ListView):
         context['table'] = table
         return context
 
-
-class DetailView(generic.DetailView):
-    model = Expense
-    template_name = "tracker/detail.html"
-
-
 class ExpenseCreate(CreateView):
     model = Expense
     fields = [
@@ -61,7 +55,13 @@ class ExpenseUpdate(UpdateView):
 
 class ExpenseDelete(DeleteView):
     model = Expense
-    success_url = reverse_lazy('tracker:index')
+    success_url = reverse_lazy('tracker:expense')
 
 
+class AnalysisView(generic.ListView):
+    template_name = "analysis/index.html"
+    context_object_name = "records"
+    model = Expense
 
+    def get_queryset(self):
+        return Expense.objects.all()
