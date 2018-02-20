@@ -8,7 +8,7 @@ from .tables import ExpenseTable
 from .models import Expense
 from .forms import ExpenseTableHelper
 from .filters import ExpenseFilter
-
+from django.shortcuts import render
 
 class IndexView(generic.ListView):
     template_name = "tracker/index.html"
@@ -66,9 +66,28 @@ class AnalysisView(generic.ListView):
     model = Expense
 
     def get_queryset(self):
-        return Expense.objects.all()
+        return Expense.objects.values('type').distinct()
 
     def get_expense_data(request, *args, **kwargs):
         json = serializers.serialize("json", Expense.objects.all())
         data = {"expense": json}
         return JsonResponse(data)
+
+    def annually(request, year):
+        context = {
+            'annually_expense': Expense.objects.filter(date__year=year)
+        }
+        return render(request, "analysis/index.html", context)
+
+    def monthly(request, year, month):
+        context = {
+            'monthly_expense': Expense.objects.filter(date__year=year).filter(date__month=month)
+        }
+        return render(request, "analysis/index.html", context)
+
+    def daily(request, year, month, day):
+        context = {
+            'daily_expense': Expense.objects.filter(date__year=year).filter(date__month=month).filter(date__day=day)
+        }
+        return render(request, "analysis/index.html", context)
+
