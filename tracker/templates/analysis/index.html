@@ -16,8 +16,52 @@
                   </li>
                 </ul>
         </div>
+
         <canvas id="myChart" width="500" height="100"></canvas>
     </div>
+
+    <script>
+                    var ctx = document.getElementById("myChart").getContext('2d');
+                    var dataset;
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: {{ months | safe }},
+                            datasets: {{ datasets | safe}}
+                        },
+                        options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: '{{ title }}'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Month'
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Amount'
+                                    }
+                                }]
+                            }
+                        }
+                    });
+    </script>
 {% endblock %}
 
 
