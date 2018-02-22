@@ -24,9 +24,9 @@
                     var ctx = document.getElementById("myChart").getContext('2d');
                     var dataset;
                     var myChart = new Chart(ctx, {
-                        type: 'line',
+                        type: '{{report_type}}',
                         data: {
-                            labels: {{ months | safe }},
+                            labels: {{ labels | safe }},
                             datasets: {{ datasets | safe}}
                         },
                         options: {

@@ -11,6 +11,7 @@ from .models import Expense
 from .forms import ExpenseTableHelper
 from .filters import ExpenseFilter
 import random
+from calendar import monthrange
 
 
 class IndexView(generic.ListView):
@@ -130,21 +131,81 @@ class AnalysisView(generic.ListView):
             datasets.append(dataset)
 
         context = {
+            'context_type': 'annually',
             'datasets': datasets,
-            'months': months,
-            'title': 'Annual Report in ' + str(year)
+            'labels': months,
+            'title': 'Annual Report in ' + str(year),
+            'report_type': 'line'
         }
 
         return render(request, "analysis/index.html", context)
 
     def monthly(request, year, month):
+        # retrieve distinct types
+        expense_type = list(Expense.objects.filter(date__year=year).filter(date__month=month).values('type').distinct().order_by()
+                            .values_list('type', flat=True))
+
+        datasets = []
+
+        lastday = monthrange(year, month)[1]
+        days = list(range(1,lastday+1))
+
+        for type in expense_type:
+            # expense
+            arr = list(Expense.objects.filter(date__year=year).filter(date__month=month).filter(type=type).distinct().order_by('date'))
+
+            # expense month by type
+            month_tmp_arr = list(Expense.objects.filter(date__year=year).filter(date__month=month).filter(type=type).values('date').distinct()
+                                 .order_by('date')
+                                 .values_list('date', flat=True))
+
+            # expense amount by type
+            expense_tmp_arr = list(Expense.objects.filter(date__year=year).filter(date__month=month).filter(type=type)
+                                   .values('date').distinct().order_by('date')
+                                   .annotate(amount=Sum('amount')).values_list('amount', flat=True))
+
+            # init array
+            daily_expense_cnt = [0] * lastday
+
+            for i, m in enumerate(arr):
+                daily_expense_cnt[m.date.day] += m.amount
+
+            total_amount = []
+
+            for j, k in enumerate(daily_expense_cnt[1:]):
+                o = {}
+                o['x'] = days[j];
+                o['y'] = daily_expense_cnt[j+1];
+                total_amount.append(o)
+
+            # generate random color
+            r = lambda: random.randint(0, 255)
+            color = '#%02X%02X%02X' % (r(), r(), r())
+
+            # construct dataset
+            dataset = {
+                'label': type,
+                'backgroundColor': color,
+                'borderColor': color,
+                'data': total_amount,
+                'fill': 'false'
+            }
+
+            datasets.append(dataset)
+
+
         context = {
-            'monthly_expense': Expense.objects.filter(date__year=year).filter(date__month=month)
+            'context_type': 'monthly',
+            'datasets': datasets,
+            'monthly_expense': expense_type,
+            'labels': days,
+            'report_type': 'bar'
         }
         return render(request, "analysis/index.html", context)
 
     def daily(request, year, month, day):
         context = {
+            'context_type': 'daily',
             'daily_expense': Expense.objects.filter(date__year=year).filter(date__month=month).filter(date__day=day)
         }
         return render(request, "analysis/index.html", context)
