@@ -204,9 +204,48 @@ class AnalysisView(generic.ListView):
         return render(request, "analysis/index.html", context)
 
     def daily(request, year, month, day):
+
+        # retrieve distinct types
+        expense_type = list(
+            Expense.objects.filter(date__year=year).filter(date__month=month)
+            .filter(date__day=day).values('type').distinct().order_by()
+            .values_list('type', flat=True))
+
+        datasets = []
+        expense_arr = []
+        color_arr = []
+        for type in expense_type:
+            # expense amount by type
+            expense_tmp_arr = list(Expense.objects.filter(date__year=year).filter(date__month=month).filter(date__day=day)
+                                   .filter(type=type)
+                                   .values('date').distinct().order_by('date')
+                                   .annotate(amount=Sum('amount')).values_list('amount', flat=True))
+            # get the sum
+            expense_arr.append(expense_tmp_arr[0])
+
+            # generate random color
+            r = lambda: random.randint(0, 255)
+            color = '#%02X%02X%02X' % (r(), r(), r())
+            color_arr.append(color)
+
+        # construct dataset
+        dataset = {
+            'label': type,
+            'backgroundColor': color_arr,
+            'borderColor': color_arr,
+            'data': expense_arr
+        }
+
+        datasets.append(dataset)
+
+        print(datasets)
         context = {
             'context_type': 'daily',
-            'daily_expense': Expense.objects.filter(date__year=year).filter(date__month=month).filter(date__day=day)
+            'datasets': datasets,
+            'daily_expense': expense_type,
+            'labels': expense_type,
+            'title': 'Daily Report on ' + str(day) + '/' + str(month) + '/' + str(year) ,
+            'report_type': 'pie'
         }
         return render(request, "analysis/index.html", context)
 

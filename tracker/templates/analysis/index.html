@@ -17,50 +17,53 @@
                 </ul>
         </div>
 
-        <canvas id="myChart" width="500" height="100"></canvas>
+        <canvas id="myChart" width="500" height="250"></canvas>
     </div>
 
+
     <script>
-                    var ctx = document.getElementById("myChart").getContext('2d');
-                    var dataset;
-                    var myChart = new Chart(ctx, {
-                        type: '{{report_type}}',
-                        data: {
-                            labels: {{ labels | safe }},
-                            datasets: {{ datasets | safe}}
-                        },
-                        options: {
-                            responsive: true,
-                            title: {
-                                display: true,
-                                text: '{{ title }}'
-                            },
-                            tooltips: {
-                                mode: 'index',
-                                intersect: false,
-                            },
-                            hover: {
-                                mode: 'nearest',
-                                intersect: true
-                            },
-                            scales: {
-                                xAxes: [{
-                                    display: true,
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: 'Month'
-                                    }
-                                }],
-                                yAxes: [{
-                                    display: true,
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: 'Amount'
-                                    }
-                                }]
-                            }
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var isShowScales = {% if report_type != 'pie' %}true{% else %}false {% endif %};
+        var dataset;
+        var myChart = new Chart(ctx, {
+            type: '{{report_type}}',
+            data: {
+                labels: {{ labels | safe }},
+                datasets: {{ datasets | safe}}
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: '{{ title }}'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                }
+                ,
+                scales: {
+                    xAxes: [{
+                        display: isShowScales,
+                        scaleLabel: {
+                            display: isShowScales,
+                            labelString: 'Month'
                         }
-                    });
+                    }],
+                    yAxes: [{
+                        display: isShowScales,
+                        scaleLabel: {
+                            display: isShowScales,
+                            labelString: 'Amount'
+                        }
+                    }]
+                }
+            }
+        });
     </script>
 {% endblock %}
 
