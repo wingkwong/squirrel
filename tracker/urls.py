@@ -16,18 +16,18 @@ urlpatterns = [
     # /delete/{id}
     path('delete/<int:pk>', views.ExpenseDelete.as_view(), name="delete_expense"),
 
-    # /analysis
-    path('analysis', views.AnalysisView.as_view(), name="analysis"),
+    # /analytics
+    path('analytics', views.AnalyticsView.as_view(), name="analytics"),
 
-    # /analysis/2018
-    path('analysis/<int:year>', views.AnalysisView.annually, name="annually"),
+    # /analytics/2018
+    path('analytics/<int:year>', views.AnalyticsView.annually, name="annually"),
 
-    # /analysis/2018/02
-    path('analysis/<int:year>/<int:month>', views.AnalysisView.monthly, name="monthly"),
+    # /analytics/2018/02
+    path('analytics/<int:year>/<int:month>', views.AnalyticsView.monthly, name="monthly"),
 
-    # /analysis/2018/02/20
-    path('analysis/<int:year>/<int:month>/<int:day>', views.AnalysisView.daily, name="daily"),
+    # /analytics/2018/02/20
+    path('analytics/<int:year>/<int:month>/<int:day>', views.AnalyticsView.daily, name="daily"),
 
-    # /analysis
-    path('api/expense/', views.AnalysisView.get_expense_data, name="api-expense")
+    # /analytics
+    path('api/expense/', views.AnalyticsView.get_expense_data, name="api-expense")
 ]

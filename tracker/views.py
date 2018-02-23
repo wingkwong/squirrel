@@ -64,8 +64,8 @@ class ExpenseDelete(DeleteView):
     success_url = reverse_lazy('tracker:expense')
 
 
-class AnalysisView(generic.ListView):
-    template_name = "analysis/index.html"
+class AnalyticsView(generic.ListView):
+    template_name = "analytics/index.html"
     context_object_name = "records"
     model = Expense
 
@@ -138,7 +138,7 @@ class AnalysisView(generic.ListView):
             'report_type': 'line'
         }
 
-        return render(request, "analysis/index.html", context)
+        return render(request, "analytics/index.html", context)
 
     def monthly(request, year, month):
         # retrieve distinct types
@@ -201,7 +201,7 @@ class AnalysisView(generic.ListView):
             'labels': days,
             'report_type': 'bar'
         }
-        return render(request, "analysis/index.html", context)
+        return render(request, "analytics/index.html", context)
 
     def daily(request, year, month, day):
 
@@ -247,5 +247,5 @@ class AnalysisView(generic.ListView):
             'title': 'Daily Report on ' + str(day) + '/' + str(month) + '/' + str(year) ,
             'report_type': 'pie'
         }
-        return render(request, "analysis/index.html", context)
+        return render(request, "analytics/index.html", context)
 
