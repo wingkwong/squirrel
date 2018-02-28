@@ -1,14 +1,9 @@
-Django Expense Tracker
-=======================
----------
-About
------
+# Django Expense Tracker
 
+## About
 A responsive web application for expense tracking and analytics powered by Django
-Features
 
-Installed apps:
------
+## Installed apps:
 * django 2.0.2
 * django.contrib.admin
 * django.contrib.auth
@@ -22,13 +17,13 @@ Installed apps:
 * bootstrap3
 * crispy_forms
 
-Configured URLs:
+## Configured URLs:
 
 * ``/add``
 * ``/analytics``
 * ``/admin/``
 
-Templates:
+## Templates:
 
 * ``tracker/expense_form.html``
 * ``tracker/from_template.html``
@@ -36,7 +31,7 @@ Templates:
 * ``tracker/index.html``
 * ``analytics/index.html``
 
-Features:
+## Features:
 
 * Responsive 
 * Expense Overview with filtering
@@ -44,18 +39,15 @@ Features:
 * Expense Analytics by year, month or day
 * Bootstrap 3 based
 
-Usage
------
+## Usage
 TBA
 
-Prerequisites
--------------
+## Prerequisites
 
-- Python >= TBA
+- Python >= 3.5
 - pip
 
-Installation
-------------
+## Installation
 TBA
 
 ## Authors
