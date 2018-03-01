@@ -4,7 +4,6 @@ from crispy_forms.layout import Layout, Field, ButtonHolder, Submit
 
 
 class ExpenseTableHelper(FormHelper):
-    currency = forms.CharField()
     date = forms.DateField(
         widget=forms.TextInput(
             attrs={'type': 'date'}
@@ -12,10 +11,10 @@ class ExpenseTableHelper(FormHelper):
     )
     form_method = 'GET'
     layout = Layout(
+        Field('date', placeholder='YYYY-MM-DD'),
         Field('description'),
         Field('type'),
         Field('payment'),
         Field('amount'),
-        Field('date', placeholder='YYYY-MM-DD'),
         Submit('submit', 'Filter'),
     )

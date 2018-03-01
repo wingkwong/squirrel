@@ -3,11 +3,11 @@ from django.urls import reverse
 
 
 class Expense(models.Model):
+    date = models.DateField()
     description = models.CharField(max_length=1000, null=True)
     type = models.CharField(max_length=30)
     payment = models.CharField(max_length=30)
     amount = models.FloatField()
-    date = models.DateField()
 
     class Meta:
         verbose_name = 'Expense'

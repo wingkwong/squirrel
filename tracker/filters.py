@@ -11,9 +11,9 @@ class ExpenseFilter(django_filters.FilterSet):
     class Meta:
         model = Expense
         fields = (
+            'date',
             'description',
             'type',
             'payment',
-            'amount',
-            'date'
+            'amount'
         )
