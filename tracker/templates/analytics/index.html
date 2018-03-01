@@ -6,16 +6,22 @@
 {% block body %}
 
     <div class="container expense-analysis">
+        {% if menu_labels %}
         <div class="analysis-menu">
             <ul class="nav nav-tabs">
+                {% for label in menu_labels %}
                   <li class="nav-item">
-                    <a class="annually nav-link active" href="#">Annual Report</a>
+                      {% if context_type == 'annually' %}
+                          <!--TODO: convert it to month str-->
+                        <a class="annually nav-link" href="{% url 'tracker:analytics'%}/{{label}}"> {{label}}</a>
+                      {% elif context_type == 'monthly'%}
+                        <a class="annually nav-link" href="{% url 'tracker:analytics'%}/{{selected_year}}/{{label}}"> {{label}}</a>
+                      {% endif %}
                   </li>
-                  <li class="nav-item">
-                    <a class="monthly nav-link" href="#">Monthly Report</a>
-                  </li>
+                {% endfor%}
                 </ul>
         </div>
+        {% endif %}
 
         <canvas id="myChart" width="500" height="250"></canvas>
     </div>

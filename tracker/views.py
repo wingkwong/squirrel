@@ -37,14 +37,15 @@ class IndexView(generic.ListView):
 
 
 class ExpenseCreate(CreateView):
-    # TODO: add datepicker 
+    # TODO: add datepicker
 
     model = Expense
     fields = [
         'date',
         'description',
         'type',
-        'payment'
+        'payment',
+        'amount'
     ]
 
 
@@ -130,22 +131,35 @@ class AnalyticsView(generic.ListView):
 
             datasets.append(dataset)
 
+        # fetch available years for menu labels
+        dates = list(Expense.objects.values('date')
+             .values_list('date', flat=True))
+        year_arr = []
+        for date in dates:
+            if date.year not in year_arr:
+                year_arr.append(date.year)
+        year_arr.sort()
+
         context = {
             'context_type': 'annually',
             'datasets': datasets,
             'labels': months,
             'title': 'Annual Report in ' + str(year),
-            'report_type': 'line'
+            'report_type': 'line',
+            'menu_labels': year_arr
         }
 
         return render(request, "analytics/index.html", context)
 
     def monthly(request, year, month):
+        months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+                  "November", "December"]
+        months_reverse = dict(January=1, February=2, March=3, April=4)
+        datasets = []
+
         # retrieve distinct types
         expense_type = list(Expense.objects.filter(date__year=year).filter(date__month=month).values('type').distinct().order_by()
                             .values_list('type', flat=True))
-
-        datasets = []
 
         lastday = monthrange(year, month)[1]
         days = list(range(1,lastday+1))
@@ -193,13 +207,25 @@ class AnalyticsView(generic.ListView):
 
             datasets.append(dataset)
 
+        # fetch available months for menu labels
+        dates = list(Expense.objects.values('date')
+                     .values_list('date', flat=True))
+        month_arr = []
+        for date in dates:
+            if date.month not in month_arr:
+                month_arr.append(date.month)
+                month_arr.sort()
+
 
         context = {
             'context_type': 'monthly',
             'datasets': datasets,
             'monthly_expense': expense_type,
             'labels': days,
-            'report_type': 'bar'
+            'title': 'Monthly Report on ' + str(months[month-1]) + ' ' + str(year),
+            'report_type': 'bar',
+            'selected_year':year ,
+            'menu_labels': month_arr
         }
         return render(request, "analytics/index.html", context)
 
@@ -238,7 +264,6 @@ class AnalyticsView(generic.ListView):
 
         datasets.append(dataset)
 
-        print(datasets)
         context = {
             'context_type': 'daily',
             'datasets': datasets,
