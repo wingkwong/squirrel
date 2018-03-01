@@ -30,6 +30,7 @@ class IndexView(generic.ListView):
         filter = ExpenseFilter(self.request.GET, queryset=self.get_queryset(**kwargs))
         filter.form.helper = ExpenseTableHelper()
         table = ExpenseTable(filter.qs)
+        table.order_by = '-date'
         RequestConfig(self.request).configure(table)
         context['filter'] = filter
         context['table'] = table
