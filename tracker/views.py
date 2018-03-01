@@ -35,25 +35,27 @@ class IndexView(generic.ListView):
         context['table'] = table
         return context
 
+
 class ExpenseCreate(CreateView):
+    # TODO: add datepicker 
+
     model = Expense
     fields = [
+        'date',
         'description',
         'type',
-        'payment',
-        'amount',
-        'date'
+        'payment'
     ]
 
 
 class ExpenseUpdate(UpdateView):
     model = Expense
     fields = [
+        'date',
         'description',
         'type',
         'payment',
-        'amount',
-        'date'
+        'amount'
     ]
 
 
