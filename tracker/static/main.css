@@ -1,4 +1,26 @@
 /*
+    Bootstrap Override
+*/
+.navbar{
+    background: #1e90ff;
+}
+
+.navbar a{
+    color: #ffffff
+}
+
+.nav>li>a:focus, .nav>li>a:hover{
+    color: #000000;
+}
+
+/*
+    Global
+*/
+body{
+    background-color: #F6F7F8;
+}
+
+/*
     Header
 */
 
@@ -13,9 +35,26 @@
     Django Table2
 */
 
+.table th{
+    background: #1e90ff;
+}
+
+.table th a{
+    color: #ffffff;
+}
 
 .delete_expense_form{
     display: inline;
+}
+
+.table-striped tbody tr:nth-child(odd) td,
+.table-striped tbody tr:nth-child(odd) th {
+	background-color: #F0FFFF;
+}
+
+.table-striped tbody tr:nth-child(even) td,
+.table-striped tbody tr:nth-child(even) th {
+	background-color: #F5F5DC;
 }
 
 
@@ -77,3 +116,4 @@
     .filterPanel {padding-top: 15px;}
     .filterPanel a {font-size: 18px;}
 }
+
