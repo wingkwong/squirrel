@@ -12,7 +12,6 @@ class ExpenseTableHelper(FormHelper):
     )
     form_method = 'GET'
     layout = Layout(
-        Field('currency'),
         Field('description'),
         Field('type'),
         Field('payment'),

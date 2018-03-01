@@ -6,7 +6,7 @@ from .models import Expense
 class ExpenseTable(tables.Table):
     class Meta:
         model = Expense
-        fields = ('currency',
+        fields = (
             'description',
             'type',
             'payment',

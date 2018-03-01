@@ -38,7 +38,6 @@ class IndexView(generic.ListView):
 class ExpenseCreate(CreateView):
     model = Expense
     fields = [
-        'currency',
         'description',
         'type',
         'payment',
@@ -50,7 +49,6 @@ class ExpenseCreate(CreateView):
 class ExpenseUpdate(UpdateView):
     model = Expense
     fields = [
-        'currency',
         'description',
         'type',
         'payment',
