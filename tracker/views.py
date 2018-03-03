@@ -147,7 +147,8 @@ class AnalyticsView(generic.ListView):
             'labels': months,
             'title': 'Annual Report in ' + str(year),
             'report_type': 'line',
-            'menu_labels': year_arr
+            'menu_labels': year_arr,
+            'x_axis_label': 'Month'
         }
 
         return render(request, "analytics/index.html", context)
@@ -226,12 +227,13 @@ class AnalyticsView(generic.ListView):
             'title': 'Monthly Report on ' + str(months[month-1]) + ' ' + str(year),
             'report_type': 'bar',
             'selected_year':year ,
-            'menu_labels': month_arr
+            'menu_labels': month_arr,
+            'x_axis_label': 'Day'
         }
         return render(request, "analytics/index.html", context)
 
     def daily(request, year, month, day):
-
+        type =[]
         # retrieve distinct types
         expense_type = list(
             Expense.objects.filter(date__year=year).filter(date__month=month)

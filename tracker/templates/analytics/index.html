@@ -30,6 +30,7 @@
     <script>
         var ctx = document.getElementById("myChart").getContext('2d');
         var isShowScales = {% if report_type != 'pie' %}true{% else %}false {% endif %};
+        var xAxisLabel = '{{x_axis_label}}';
         var dataset;
         var myChart = new Chart(ctx, {
             type: '{{report_type}}',
@@ -57,7 +58,7 @@
                         display: isShowScales,
                         scaleLabel: {
                             display: isShowScales,
-                            labelString: 'Month'
+                            labelString: xAxisLabel
                         }
                     }],
                     yAxes: [{
