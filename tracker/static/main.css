@@ -117,3 +117,45 @@ body{
     .filterPanel a {font-size: 18px;}
 }
 
+/*
+    Analytics
+*/
+
+.analytics-card{
+    margin: 20px;
+    padding: 40px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.analytics-card.total-records{
+    background-color: #343a40;
+}
+
+.analytics-card.total-expenses{
+    background-color: #6610f2;
+}
+
+.analytics-card.categories{
+    background-color: #6f42c1;
+}
+
+.analytics-card.avg-year{
+    background-color: #dc3545;
+}
+
+.analytics-card.avg-month{
+    background-color: #17a2b8;
+}
+
+.analytics-card.avg-day{
+    background-color: #6c757d;
+}
+
+.analytics-card .header{
+    font-size: 40px;
+}
+
+.analytics-card .content{
+    font-size: 14px;
+}

@@ -5,7 +5,50 @@
 
 {% block body %}
 
-    <div class="container expense-analysis">
+    <div class="container expense-analytics">
+        {% if context_type == None%}
+            <div class="row">
+                <div class="col-md-4">
+                     <div class="analytics-card total-records">
+                        <div class="header">229</div>
+                        <div class="content">Total Records</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="analytics-card total-expenses">
+                        <div class="header">$30000000</div>
+                        <div class="content">Total Expenses</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="analytics-card categories">
+                        <div class="header">12</div>
+                        <div class="content">Categories</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="analytics-card avg-year">
+                        <div class="header">$23024820</div>
+                        <div class="content">Avg. year</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="analytics-card avg-month">
+                        <div class="header">$1032414</div>
+                        <div class="content">Avg. month</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="analytics-card avg-day">
+                        <div class="header">$1334</div>
+                        <div class="content">Avg. day</div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+
+
         {% if menu_labels %}
         <div class="analysis-menu">
             <ul class="nav nav-tabs">
