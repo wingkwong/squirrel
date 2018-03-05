@@ -17,7 +17,7 @@ urlpatterns = [
     path('delete/<int:pk>', views.ExpenseDelete.as_view(), name="delete_expense"),
 
     # /analytics
-    path('analytics', views.AnalyticsView.as_view(), name="analytics"),
+    path('analytics', views.AnalyticsView.statistic, name="analytics"),
 
     # /analytics/2018
     path('analytics/<int:year>', views.AnalyticsView.annually, name="annually"),
