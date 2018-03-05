@@ -6,23 +6,23 @@
 {% block body %}
 
     <div class="container expense-analytics">
-        {% if context_type == None%}
+        {% if context_type == 'statistic'%}
             <div class="row">
                 <div class="col-md-4">
                      <div class="analytics-card total-records">
-                        <div class="header">229</div>
+                        <div class="header">{{total_records}}</div>
                         <div class="content">Total Records</div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="analytics-card total-expenses">
-                        <div class="header">$30000000</div>
+                        <div class="header">${{total_expenses}}</div>
                         <div class="content">Total Expenses</div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="analytics-card categories">
-                        <div class="header">12</div>
+                        <div class="header">{{categories}}</div>
                         <div class="content">Categories</div>
                     </div>
                 </div>

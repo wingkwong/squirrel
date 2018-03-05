@@ -5,7 +5,7 @@ from django_tables2 import RequestConfig
 from django.http import JsonResponse
 from django.core import serializers
 from django.shortcuts import render
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from .tables import ExpenseTable
 from .models import Expense
 from .forms import ExpenseTableHelper
@@ -78,6 +78,21 @@ class AnalyticsView(generic.ListView):
         json = serializers.serialize("json", Expense.objects.all())
         data = {"expense": json}
         return JsonResponse(data)
+
+    def statistic(request):
+        total_records = Expense.objects.count()
+        total_expenses = Expense.objects.aggregate(amount=Sum('amount'))['amount']
+        categories = Expense.objects.values('type').annotate(the_count=Count('type')).count()
+        print(categories)
+
+        context = {
+            'context_type': 'statistic',
+            'total_records': total_records,
+            'total_expenses': total_expenses,
+            'categories': categories
+        }
+
+        return render(request, "analytics/index.html", context)
 
     def annually(request, year):
         # retrieve distinct types
