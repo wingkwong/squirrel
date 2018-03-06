@@ -1,9 +1,19 @@
 import django_tables2 as tables
-from django_tables2.utils import A
+from django.utils.safestring import mark_safe
+from django.utils.html import escape
 from .models import Expense
 
 
+class ActionButtons(tables.Column):
+    empty_values = list()
+    def render(self, value, record):
+        html = "<a href=/update/%s class='btn btn-info'>Edit</a>" % escape(record.id)
+        print(html)
+        return mark_safe(html)
+
+
 class ExpenseTable(tables.Table):
+    actions = ActionButtons()
     class Meta:
         model = Expense
         fields = (
@@ -11,9 +21,9 @@ class ExpenseTable(tables.Table):
             'description',
             'type',
             'payment',
-            'amount',
+            'amount'
             )
-        attrs = {"class": "table table-striped table-bordered dt-responsive nowrap"}
+        attrs = {"class": "table table-striped dt-responsive nowrap"}
         empty_text = "No records found"
         template_name = 'django_tables2/bootstrap.html'
 
