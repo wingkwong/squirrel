@@ -41,7 +41,7 @@ a:hover{
 */
 
 .table th{
-    background: #1e90ff;
+    background: #5179ad;
 }
 
 .table th a{
@@ -54,12 +54,12 @@ a:hover{
 
 .table-striped tbody tr:nth-child(odd) td,
 .table-striped tbody tr:nth-child(odd) th {
-	background-color: #F0FFFF;
+	background-color: #fff;
 }
 
 .table-striped tbody tr:nth-child(even) td,
 .table-striped tbody tr:nth-child(even) th {
-	background-color: #F5F5DC;
+	background-color: #fcfcfc;
 }
 
 
