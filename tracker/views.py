@@ -12,6 +12,7 @@ from .forms import ExpenseTableHelper
 from .filters import ExpenseFilter
 import random
 from calendar import monthrange
+import datetime
 
 
 class IndexView(generic.ListView):
@@ -108,15 +109,21 @@ class AnalyticsView(generic.ListView):
         avg_year = total_expenses / year_arr.__len__()
         avg_month = total_expenses / month_arr.__len__()
         avg_day = total_expenses / day_arr.__len__()
-        
+
+        now = datetime.datetime.now()
+
         context = {
             'context_type': 'statistic',
             'total_records': total_records,
             'total_expenses': float("{0:.2f}".format(total_expenses)),
+            'categories': categories,
             'avg_year': float("{0:.2f}".format(avg_year)),
             'avg_month': float("{0:.2f}".format(avg_month)),
             'avg_day': float("{0:.2f}".format(avg_day)),
-            'categories': categories
+            'current_year': now.year,
+            'current_month': now.month,
+            'current_day': now.day
+
         }
 
         return render(request, "analytics/index.html", context)

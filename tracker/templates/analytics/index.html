@@ -7,7 +7,8 @@
 
     <div class="container expense-analytics">
         {% if context_type == 'statistic'%}
-            <div class="row">
+            <section>
+                <div class="row">
                 <div class="col-md-4">
                      <div class="analytics-card total-records">
                         <div class="header">{{total_records}}</div>
@@ -45,9 +46,36 @@
                     </div>
                 </div>
             </div>
+            </section>
+            <section>
+                <div class="row">
+                <div>
+                    <h2 style="text-align:center">Check out your expense reports</h2>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'tracker:analytics'%}/{{current_year}}">
+                        <div class="analytics-card avg-year">
+                            <div class="header">Annualy Report</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'tracker:analytics'%}/{{current_year}}/{{current_month}}">
+                        <div class="analytics-card avg-month">
+                            <div class="header">Monthly Report</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'tracker:analytics'%}/{{current_year}}/{{current_month}}/{{current_day}}">
+                        <div class="analytics-card avg-day">
+                            <div class="header">Daily <br/>Report</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            </section>
         {% endif %}
-
-
 
         {% if menu_labels %}
         <div class="analysis-menu">

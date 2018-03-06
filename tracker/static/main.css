@@ -20,6 +20,11 @@ body{
     background-color: #F6F7F8;
 }
 
+a:focus,
+a:hover{
+    text-decoration: none;
+}
+
 /*
     Header
 */
