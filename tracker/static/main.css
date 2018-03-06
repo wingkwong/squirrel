@@ -126,6 +126,7 @@ body{
     padding: 40px;
     text-align: center;
     color: #ffffff;
+    overflow: hidden;
 }
 
 .analytics-card.total-records{

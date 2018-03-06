@@ -80,15 +80,42 @@ class AnalyticsView(generic.ListView):
         return JsonResponse(data)
 
     def statistic(request):
+        # count total record
         total_records = Expense.objects.count()
-        total_expenses = Expense.objects.aggregate(amount=Sum('amount'))['amount']
-        categories = Expense.objects.values('type').annotate(the_count=Count('type')).count()
-        print(categories)
 
+        # sum up all the expenses
+        total_expenses = Expense.objects.aggregate(amount=Sum('amount'))['amount']
+
+        # categories count
+        categories = Expense.objects.values('type').annotate(the_count=Count('type')).count()
+
+        # list out dates for the following processing.
+        dates = list(Expense.objects.values('date')
+                     .values_list('date', flat=True))
+
+        # avg amount per year, per month and per day
+        year_arr = []
+        month_arr = []
+        day_arr = []
+        for date in dates:
+            if date.year not in year_arr:
+                year_arr.append(date.year)
+            if date.year not in month_arr:
+                month_arr.append(date.month)
+            if date.year not in day_arr:
+                day_arr.append(date.day)
+
+        avg_year = total_expenses / year_arr.__len__()
+        avg_month = total_expenses / month_arr.__len__()
+        avg_day = total_expenses / day_arr.__len__()
+        
         context = {
             'context_type': 'statistic',
             'total_records': total_records,
-            'total_expenses': total_expenses,
+            'total_expenses': float("{0:.2f}".format(total_expenses)),
+            'avg_year': float("{0:.2f}".format(avg_year)),
+            'avg_month': float("{0:.2f}".format(avg_month)),
+            'avg_day': float("{0:.2f}".format(avg_day)),
             'categories': categories
         }
 
