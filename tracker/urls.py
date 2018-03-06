@@ -5,16 +5,16 @@ app_name = 'tracker'
 
 urlpatterns = [
     # /
-    path('', views.IndexView.as_view(), name ="expense"),
+    path('tracker', views.IndexView.as_view(), name ="expense"),
 
     # /add
-    path('add', views.ExpenseCreate.as_view(), name="create_expense"),
+    path('tracker/add', views.ExpenseCreate.as_view(), name="create_expense"),
 
     # /update/{id}
-    path('update/<int:pk>', views.ExpenseUpdate.as_view(), name="update_expense"),
+    path('tracker/update/<int:pk>', views.ExpenseUpdate.as_view(), name="update_expense"),
 
     # /delete/{id}
-    path('delete/<int:pk>', views.ExpenseDelete.as_view(), name="delete_expense"),
+    path('tracker/delete/<int:pk>', views.ExpenseDelete.as_view(), name="delete_expense"),
 
     # /analytics
     path('analytics', views.AnalyticsView.statistic, name="analytics"),
