@@ -28,7 +28,4 @@ urlpatterns = [
 
     # /analytics/2018/02/20
     path('analytics/<int:year>/<int:month>/<int:day>', login_required(views.AnalyticsView.daily), name="daily"),
-
-    # /analytics
-    path('api/expense/', views.AnalyticsView.get_expense_data, name="api-expense")
 ]

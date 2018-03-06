@@ -75,11 +75,6 @@ class AnalyticsView(generic.ListView):
     def get_queryset(self):
         return Expense.objects.values('type').distinct()
 
-    def get_expense_data(request, *args, **kwargs):
-        json = serializers.serialize("json", Expense.objects.all())
-        data = {"expense": json}
-        return JsonResponse(data)
-
     def statistic(request):
         # count total record
         total_records = Expense.objects.count()
