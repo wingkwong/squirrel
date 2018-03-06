@@ -46,6 +46,14 @@
                     </a>
                 </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                 <li><a href="#">{{ user.get_username }}</a></li>
+                 <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+               {% else %}
+                 <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+               {% endif %}
+            </ul>
         </div>
     </div>
 </nav>
