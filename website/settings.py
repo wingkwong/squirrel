@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tracker.apps.TrackerConfig',
+    'account.apps.AccountConfig',
     'django_tables2',
     'django_filters',
     'bootstrap3',
