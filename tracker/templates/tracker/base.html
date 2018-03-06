@@ -27,10 +27,10 @@
             </button>
             <a class="navbar-brand" href="{% url 'tracker:expense' %}">Expense Tracker</a>
         </div>
-
+        {% if user.is_authenticated %}
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-                <li class="active">
+                <li>
                     <a href="{% url 'tracker:expense' %}">
                         <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp; Expense Overview
                     </a>
@@ -46,13 +46,15 @@
                     </a>
                 </li>
             </ul>
+            {% endif%}
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                 <li><a href="#">{{ user.get_username }}</a></li>
-                 <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
-               {% else %}
-                 <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
-               {% endif %}
+                     <li><a href="#">{{ user.get_username }}</a></li>
+                     <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+                {% else %}
+                     <li><a href="{% url 'login'%}?next={{request.path}}">Register</a></li>
+                     <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
