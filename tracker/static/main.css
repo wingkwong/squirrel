@@ -126,6 +126,13 @@ a:hover{
     Analytics
 */
 
+
+.analysis-menu .nav-tabs>li{
+    background: #ffffff;
+    margin: 0 10px 5px 0;
+}
+
+
 .analytics-card{
     margin: 20px;
     padding: 40px;
@@ -165,3 +172,4 @@ a:hover{
 .analytics-card .content{
     font-size: 14px;
 }
+
