@@ -19,17 +19,31 @@ A responsive web application for expense tracking and analytics powered by Djang
 
 ## Configured URLs:
 
-* ``/add``
+* ``/tracker``
+* ``/tracker/add``
+* ``/tracker/update/{id}``
 * ``/analytics``
+* ``/analytics/{year}``
+* ``/analytics/{year}/{month}``
+* ``/analytics/{year}/{month}/{day}``
+* ``/accounts/register``
+* ``/accounts/login``
+* ``/accounts/logout``
+* ``/accounts/profile/{id}``
 * ``/admin/``
 
 ## Templates:
 
+Tracker:
 * ``tracker/expense_form.html``
 * ``tracker/from_template.html``
 * ``tracker/header.html``
 * ``tracker/index.html``
 * ``analytics/index.html``
+
+Accounts:
+* ``registration/login.html``
+* ``registration/logged_out.html``
 
 ## Features:
 
