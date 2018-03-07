@@ -76,11 +76,18 @@ class AnalyticsView(generic.ListView):
         return Expense.objects.values('type').distinct()
 
     def statistic(request):
+        # init
+        avg_year = 0
+        avg_month = 0
+        avg_day = 0
+
         # count total record
         total_records = Expense.objects.count()
 
         # sum up all the expenses
         total_expenses = Expense.objects.aggregate(amount=Sum('amount'))['amount']
+        if total_expenses is None:
+            total_expenses = 0
 
         # categories count
         categories = Expense.objects.values('type').annotate(the_count=Count('type')).count()
@@ -93,6 +100,7 @@ class AnalyticsView(generic.ListView):
         year_arr = []
         month_arr = []
         day_arr = []
+
         for date in dates:
             if date.year not in year_arr:
                 year_arr.append(date.year)
@@ -101,20 +109,22 @@ class AnalyticsView(generic.ListView):
             if date.year not in day_arr:
                 day_arr.append(date.day)
 
-        avg_year = total_expenses / year_arr.__len__()
-        avg_month = total_expenses / month_arr.__len__()
-        avg_day = total_expenses / day_arr.__len__()
+        if total_expenses > 0 :
+            avg_year = float("{0:.2f}".format(total_expenses / year_arr.__len__()))
+            avg_month = float("{0:.2f}".format(total_expenses / month_arr.__len__()))
+            avg_day = float("{0:.2f}".format(total_expenses / day_arr.__len__()))
+            total_expenses = float("{0:.2f}".format(total_expenses))
 
         now = datetime.datetime.now()
 
         context = {
             'context_type': 'statistic',
             'total_records': total_records,
-            'total_expenses': float("{0:.2f}".format(total_expenses)),
+            'total_expenses': total_expenses,
             'categories': categories,
-            'avg_year': float("{0:.2f}".format(avg_year)),
-            'avg_month': float("{0:.2f}".format(avg_month)),
-            'avg_day': float("{0:.2f}".format(avg_day)),
+            'avg_year': avg_year,
+            'avg_month': avg_month,
+            'avg_day': avg_day,
             'current_year': now.year,
             'current_month': now.month,
             'current_day': now.day
