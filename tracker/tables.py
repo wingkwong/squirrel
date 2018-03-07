@@ -7,8 +7,7 @@ from .models import Expense
 class ActionButtons(tables.Column):
     empty_values = list()
     def render(self, value, record):
-        html = "<a href=/update/%s class='btn btn-info'>Edit</a>" % escape(record.id)
-        print(html)
+        html = "<a href=/tracker/update/%s class='btn btn-info'>Edit</a>" % escape(record.id)
         return mark_safe(html)
 
 
