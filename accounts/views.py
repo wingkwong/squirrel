@@ -1,5 +1,4 @@
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 
