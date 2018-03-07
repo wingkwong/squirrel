@@ -2,8 +2,7 @@ from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django_tables2 import RequestConfig
-from django.http import JsonResponse
-from django.core import serializers
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.db.models import Sum, Count
 from .tables import ExpenseTable
@@ -50,6 +49,13 @@ class ExpenseCreate(CreateView):
         'amount'
     ]
 
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.created_by = self.request.user
+        obj.created_at = datetime.datetime.now()
+        obj.save()
+        return HttpResponseRedirect(reverse_lazy('tracker:expense'))
+
 
 class ExpenseUpdate(UpdateView):
     model = Expense
@@ -62,6 +68,7 @@ class ExpenseUpdate(UpdateView):
     ]
 
 
+# obsolete
 class ExpenseDelete(DeleteView):
     model = Expense
     success_url = reverse_lazy('tracker:expense')

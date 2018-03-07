@@ -9,6 +9,7 @@ class Expense(models.Model):
     payment = models.CharField(max_length=30)
     amount = models.FloatField()
     created_by = models.CharField(max_length=100)
+    created_at = models.DateField()
 
     class Meta:
         verbose_name = 'Expense'
