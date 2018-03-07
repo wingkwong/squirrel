@@ -38,6 +38,26 @@ a:hover{
 }
 
 /*
+    Login
+*/
+
+.login{
+    background-color: #2e6644;
+    color: #708779;
+    padding: 40px;
+    text-align: center;
+}
+
+.login a{
+    color: #ffeeff;
+}
+
+.login .logo{
+    margin-bottom: 20px;
+}
+
+
+/*
     Django Table2
 */
 

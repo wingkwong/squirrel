@@ -3,39 +3,37 @@
 
 
 {% block body %}
+    <div class="login">
+        {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+            {% if next %}
+                {% if user.is_authenticated %}
+                <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+                {% else %}
+                <p>Please login to see this page.</p>
+                {% endif %}
+            {% endif %}
+            <img class="logo" src="https://dummyimage.com/200x200/000000/fff?text=logo goes here"/>
+            <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+                <div class="form-group">
+                  <td>{{ form.username }}</td>
+                </div>
+                <div class="form-group">
+                  <td>{{ form.password }}</td>
+                </div>
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
-
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-
-<div>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</div>
-<div>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</div>
-
-<div>
-  <input type="submit" value="login" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</div>
-</form>
+                <div class="form-group">
+                  <input type="submit" value="login" />
+                  <input type="hidden" name="next" value="{{ next }}" />
+                </div>
+            </form>
 
 
-<p><a href="{% url 'password_reset' %}">Reset Password</a></p>
-
+            <p><a href="{% url 'password_reset' %}">Forget Password?</a></p>
+            <p>Don't have an account? <a href="{% url 'password_reset' %}">Register here.</a></p>
+    </div>
 {% endblock %}
