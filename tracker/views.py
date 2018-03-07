@@ -5,6 +5,7 @@ from django_tables2 import RequestConfig
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.db.models import Sum, Count
+from django.db import models
 from .tables import ExpenseTable
 from .models import Expense
 from .forms import ExpenseTableHelper
@@ -23,7 +24,7 @@ class IndexView(generic.ListView):
     formhelper_class = ExpenseTableHelper
 
     def get_queryset(self):
-        return Expense.objects.all()
+        return Expense.objects.filter(created_by=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -67,7 +68,6 @@ class ExpenseUpdate(UpdateView):
         'amount'
     ]
 
-
 # obsolete
 class ExpenseDelete(DeleteView):
     model = Expense
@@ -79,28 +79,28 @@ class AnalyticsView(generic.ListView):
     context_object_name = "records"
     model = Expense
 
-    def get_queryset(self):
-        return Expense.objects.values('type').distinct()
-
     def statistic(request):
         # init
         avg_year = 0
         avg_month = 0
         avg_day = 0
 
+        # get user expense objects
+        exp = Expense.objects.filter(created_by=request.user)
+
         # count total record
-        total_records = Expense.objects.count()
+        total_records = exp.count()
 
         # sum up all the expenses
-        total_expenses = Expense.objects.aggregate(amount=Sum('amount'))['amount']
+        total_expenses = exp.aggregate(amount=Sum('amount'))['amount']
         if total_expenses is None:
             total_expenses = 0
 
         # categories count
-        categories = Expense.objects.values('type').annotate(the_count=Count('type')).count()
+        categories = exp.values('type').annotate(the_count=Count('type')).count()
 
         # list out dates for the following processing.
-        dates = list(Expense.objects.values('date')
+        dates = list(exp.values('date')
                      .values_list('date', flat=True))
 
         # avg amount per year, per month and per day
@@ -141,8 +141,11 @@ class AnalyticsView(generic.ListView):
         return render(request, "analytics/index.html", context)
 
     def annually(request, year):
+        # get user expense objects
+        exp = Expense.objects.filter(created_by=request.user)
+
         # retrieve distinct types
-        expense_type = list(Expense.objects.filter(date__year=year).values('type').distinct().order_by()
+        expense_type = list(exp.filter(date__year=year).values('type').distinct().order_by()
                                  .values_list('type', flat=True))
 
         datasets = []
@@ -151,15 +154,15 @@ class AnalyticsView(generic.ListView):
 
         for type in expense_type:
             # expense
-            arr = list(Expense.objects.filter(date__year=year).filter(type=type).distinct().order_by('date'))
+            arr = list(exp.filter(date__year=year).filter(type=type).distinct().order_by('date'))
 
             # expense month by type
-            month_tmp_arr = list(Expense.objects.filter(date__year=year).filter(type=type).values('date').distinct()
+            month_tmp_arr = list(exp.filter(date__year=year).filter(type=type).values('date').distinct()
                             .order_by('date')
                             .values_list('date', flat=True))
 
             # expense amount by type
-            expense_tmp_arr = list(Expense.objects.filter(date__year=year).filter(type=type)
+            expense_tmp_arr = list(exp.filter(date__year=year).filter(type=type)
                 .values('date').distinct().order_by('date')
                 .annotate(amount=Sum('amount')).values_list('amount', flat=True))
 
@@ -175,7 +178,6 @@ class AnalyticsView(generic.ListView):
                 o = {}
                 o['x'] = months[j];
                 o['y'] = monthly_expense_cnt[j];
-                print(o)
                 total_amount.append(o)
 
             # generate random color
@@ -194,7 +196,7 @@ class AnalyticsView(generic.ListView):
             datasets.append(dataset)
 
         # fetch available years for menu labels
-        dates = list(Expense.objects.values('date')
+        dates = list(exp.values('date')
              .values_list('date', flat=True))
         year_arr = []
         for date in dates:
@@ -215,13 +217,16 @@ class AnalyticsView(generic.ListView):
         return render(request, "analytics/index.html", context)
 
     def monthly(request, year, month):
+        # get user expense objects
+        exp = Expense.objects.filter(created_by=request.user)
+
         months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
                   "November", "December"]
         months_reverse = dict(January=1, February=2, March=3, April=4)
         datasets = []
 
         # retrieve distinct types
-        expense_type = list(Expense.objects.filter(date__year=year).filter(date__month=month).values('type').distinct().order_by()
+        expense_type = list(exp.filter(date__year=year).filter(date__month=month).values('type').distinct().order_by()
                             .values_list('type', flat=True))
 
         lastday = monthrange(year, month)[1]
@@ -229,15 +234,15 @@ class AnalyticsView(generic.ListView):
 
         for type in expense_type:
             # expense
-            arr = list(Expense.objects.filter(date__year=year).filter(date__month=month).filter(type=type).distinct().order_by('date'))
+            arr = list(exp.filter(date__year=year).filter(date__month=month).filter(type=type).distinct().order_by('date'))
 
             # expense month by type
-            month_tmp_arr = list(Expense.objects.filter(date__year=year).filter(date__month=month).filter(type=type).values('date').distinct()
+            month_tmp_arr = list(exp.filter(date__year=year).filter(date__month=month).filter(type=type).values('date').distinct()
                                  .order_by('date')
                                  .values_list('date', flat=True))
 
             # expense amount by type
-            expense_tmp_arr = list(Expense.objects.filter(date__year=year).filter(date__month=month).filter(type=type)
+            expense_tmp_arr = list(exp.filter(date__year=year).filter(date__month=month).filter(type=type)
                                    .values('date').distinct().order_by('date')
                                    .annotate(amount=Sum('amount')).values_list('amount', flat=True))
 
@@ -271,7 +276,7 @@ class AnalyticsView(generic.ListView):
             datasets.append(dataset)
 
         # fetch available months for menu labels
-        dates = list(Expense.objects.values('date')
+        dates = list(exp.values('date')
                      .values_list('date', flat=True))
         month_arr = []
         for date in dates:
@@ -294,10 +299,13 @@ class AnalyticsView(generic.ListView):
         return render(request, "analytics/index.html", context)
 
     def daily(request, year, month, day):
+        # get user expense objects
+        exp = Expense.objects.filter(created_by=request.user)
+
         type =[]
         # retrieve distinct types
         expense_type = list(
-            Expense.objects.filter(date__year=year).filter(date__month=month)
+            exp.filter(date__year=year).filter(date__month=month)
             .filter(date__day=day).values('type').distinct().order_by()
             .values_list('type', flat=True))
 
@@ -306,7 +314,7 @@ class AnalyticsView(generic.ListView):
         color_arr = []
         for type in expense_type:
             # expense amount by type
-            expense_tmp_arr = list(Expense.objects.filter(date__year=year).filter(date__month=month).filter(date__day=day)
+            expense_tmp_arr = list(exp.filter(date__year=year).filter(date__month=month).filter(date__day=day)
                                    .filter(type=type)
                                    .values('date').distinct().order_by('date')
                                    .annotate(amount=Sum('amount')).values_list('amount', flat=True))
