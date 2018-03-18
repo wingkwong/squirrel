@@ -204,6 +204,16 @@ class AnalyticsView(generic.ListView):
                 year_arr.append(date.year)
         year_arr.sort()
 
+        # construct submenu
+        expense_per_month = []
+        month_not_none = []
+        for i, month in enumerate(months):
+            amount = exp.filter(date__year=year).filter(date__month=(i+1)).values('date').distinct().order_by('date').aggregate(amount=Sum('amount'))['amount']
+            if amount is not None:
+                expense_per_month.append(float("{0:.2f}".format(amount)))
+                month_not_none.append((i+1))
+        submenu = zip(month_not_none, expense_per_month)
+
         context = {
             'context_type': 'annually',
             'datasets': datasets,
@@ -211,7 +221,8 @@ class AnalyticsView(generic.ListView):
             'title': 'Annual Report in ' + str(year),
             'report_type': 'line',
             'menu_labels': year_arr,
-            'x_axis_label': 'Month'
+            'x_axis_label': 'Month',
+            'submenu': submenu
         }
 
         return render(request, "analytics/index.html", context)
@@ -284,7 +295,17 @@ class AnalyticsView(generic.ListView):
                 month_arr.append(date.month)
                 month_arr.sort()
 
-
+        # construct submenu
+        expense_per_day = []
+        day_not_none  = []
+        for i, d in enumerate(days):
+            amount = exp.filter(date__year=year).filter(date__month=month).filter(date__day=(i+1)).values('date').distinct().order_by(
+                'date').aggregate(amount=Sum('amount'))['amount']
+            if amount is not None:
+                expense_per_day.append(float("{0:.2f}".format(amount)))
+                day_not_none.append((i+1))
+        submenu = zip(day_not_none, expense_per_day)
+        
         context = {
             'context_type': 'monthly',
             'datasets': datasets,
@@ -294,7 +315,8 @@ class AnalyticsView(generic.ListView):
             'report_type': 'bar',
             'selected_year':year ,
             'menu_labels': month_arr,
-            'x_axis_label': 'Day'
+            'x_axis_label': 'Day',
+            'submenu': submenu
         }
         return render(request, "analytics/index.html", context)
 
