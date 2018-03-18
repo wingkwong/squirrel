@@ -2,15 +2,22 @@
     Bootstrap Override
 */
 .navbar{
-    background: #1e90ff;
+    background: #3f175e;
 }
 
 .navbar a{
     color: #ffffff
 }
 
+
+.btn,
+.btn:hover,
+.btn:active,
+.btn:focus,
 .nav>li>a:focus, .nav>li>a:hover{
-    color: #000000;
+    background: #3f175e;
+    color: #ffffff;
+    border-color: #3f175e;
 }
 
 /*
@@ -62,7 +69,7 @@ a:hover{
 */
 
 .table th{
-    background: #5179ad;
+    background: #3f175e;
 }
 
 .table th a{
@@ -149,8 +156,12 @@ a:hover{
 
 
 .analysis-menu .nav-tabs>li{
-    background: #ffffff;
+    background: #3f175e;
     margin: 0 10px 5px 0;
+}
+
+.analysis-menu .nav-tabs>li a{
+    color: #ffffff;
 }
 
 
