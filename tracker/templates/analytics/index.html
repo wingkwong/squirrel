@@ -94,23 +94,28 @@
         </div>
         {% endif %}
 
-    <div class="row">
-		<div class="col-sm-4 col-md-2 sidebar">
-            <div class="list-group">
-                <span href="#" class="list-group-item active">
-                    {{x_axis_label}}
-                </span>
-                {% for label, amount in submenu%}
-                    <a href="#" class="list-group-item">
-                        <i class="fa fa-bar-chart-o"></i> {{label}} <span class="badge">{{amount}}</span>
-                    </a>
-                {% endfor %}
+        {% if context_type == 'annually' or context_type == 'monthly' or context_type == 'daily' %}
+
+            <div class="row">
+                {% if submenu %}
+                <div class="col-sm-4 col-md-2 sidebar">
+                    <div class="list-group">
+                        <span href="#" class="list-group-item active">
+                            {{x_axis_label}}
+                        </span>
+                        {% for label, amount in submenu %}
+                            <a href="#" class="list-group-item">
+                                <i class="fa fa-bar-chart-o"></i> {{label}} <span class="badge">{{amount}}</span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="col-md-10">
+                    <canvas id="myChart" width="500" height="250"></canvas>
+                </div>
             </div>
-        </div>
-        <div class="col-md-10">
-            <canvas id="myChart" width="500" height="250"></canvas>
-        </div>
-    </div>
+            {% endif %}
     </div>
 
 
