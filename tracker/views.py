@@ -212,7 +212,11 @@ class AnalyticsView(generic.ListView):
             if amount is not None:
                 expense_per_month.append(float("{0:.2f}".format(amount)))
                 month_not_none.append((i+1))
-        submenu = zip(month_not_none, expense_per_month)
+
+        if expense_per_month:
+            submenu = zip(month_not_none, expense_per_month)
+        else:
+            submenu = False
 
         context = {
             'context_type': 'annually',
@@ -304,7 +308,11 @@ class AnalyticsView(generic.ListView):
             if amount is not None:
                 expense_per_day.append(float("{0:.2f}".format(amount)))
                 day_not_none.append((i+1))
-        submenu = zip(day_not_none, expense_per_day)
+
+        if expense_per_day:
+            submenu = zip(day_not_none, expense_per_day)
+        else:
+            submenu = False
         
         context = {
             'context_type': 'monthly',
@@ -358,13 +366,29 @@ class AnalyticsView(generic.ListView):
 
         datasets.append(dataset)
 
+        # construct submenu
+        expense_per_type = []
+        print(expense_type)
+        for i, type in enumerate(expense_type):
+            amount = exp.filter(date__year=year).filter(date__month=month).filter(date__day=day).filter(type=type).values('date').distinct().order_by('date').aggregate(amount=Sum('amount'))['amount']
+            print(amount)
+            if amount is not None:
+                expense_per_type.append(float("{0:.2f}".format(amount)))
+
+        if expense_per_type:
+            submenu = zip(expense_type, expense_per_type)
+        else:
+            submenu = False
+
         context = {
             'context_type': 'daily',
             'datasets': datasets,
             'daily_expense': expense_type,
             'labels': expense_type,
             'title': 'Daily Report on ' + str(day) + '/' + str(month) + '/' + str(year) ,
-            'report_type': 'pie'
+            'x_axis_label': 'Type',
+            'report_type': 'pie',
+            'submenu': submenu
         }
         return render(request, "analytics/index.html", context)
 
