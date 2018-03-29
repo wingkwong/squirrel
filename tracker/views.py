@@ -357,21 +357,19 @@ class AnalyticsView(generic.ListView):
             color_arr.append(color)
 
         # construct dataset
-        dataset = {
-            'label': type,
-            'backgroundColor': color_arr,
-            'borderColor': color_arr,
-            'data': expense_arr
-        }
-
-        datasets.append(dataset)
+        if color_arr and expense_arr:
+            dataset = {
+                'label': type,
+                'backgroundColor': color_arr,
+                'borderColor': color_arr,
+                'data': expense_arr
+            }
+            datasets.append(dataset)
 
         # construct submenu
         expense_per_type = []
-        print(expense_type)
         for i, type in enumerate(expense_type):
             amount = exp.filter(date__year=year).filter(date__month=month).filter(date__day=day).filter(type=type).values('date').distinct().order_by('date').aggregate(amount=Sum('amount'))['amount']
-            print(amount)
             if amount is not None:
                 expense_per_type.append(float("{0:.2f}".format(amount)))
 
