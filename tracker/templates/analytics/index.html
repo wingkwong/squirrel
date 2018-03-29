@@ -95,7 +95,6 @@
         {% endif %}
 
         {% if context_type == 'annually' or context_type == 'monthly' or context_type == 'daily' %}
-
             <div class="row">
                 {% if submenu %}
                 <div class="col-sm-4 col-md-2 sidebar">
@@ -112,7 +111,56 @@
                 </div>
                 {% endif %}
                 <div class="col-md-10">
-                    <canvas id="myChart" width="500" height="250"></canvas>
+                    {% if datasets %}
+                        <canvas id="myChart" width="500" height="250"></canvas>
+                        <script>
+            var ctx = document.getElementById("myChart").getContext('2d');
+            var isShowScales = {% if report_type != 'pie' %}true{% else %}false {% endif %};
+            var xAxisLabel = '{{x_axis_label}}';
+            var dataset;
+            var myChart = new Chart(ctx, {
+                type: '{{report_type}}',
+                data: {
+                    labels: {{ labels | safe }},
+                    datasets: {{ datasets | safe}}
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: '{{ title }}'
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    }
+                    ,
+                    scales: {
+                        xAxes: [{
+                            display: isShowScales,
+                            scaleLabel: {
+                                display: isShowScales,
+                                labelString: xAxisLabel
+                            }
+                        }],
+                        yAxes: [{
+                            display: isShowScales,
+                            scaleLabel: {
+                                display: isShowScales,
+                                labelString: 'Amount'
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+                    {% else %}
+                        No data
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -120,51 +168,6 @@
 
 
 
-    <script>
-        var ctx = document.getElementById("myChart").getContext('2d');
-        var isShowScales = {% if report_type != 'pie' %}true{% else %}false {% endif %};
-        var xAxisLabel = '{{x_axis_label}}';
-        var dataset;
-        var myChart = new Chart(ctx, {
-            type: '{{report_type}}',
-            data: {
-                labels: {{ labels | safe }},
-                datasets: {{ datasets | safe}}
-            },
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: '{{ title }}'
-                },
-                tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true
-                }
-                ,
-                scales: {
-                    xAxes: [{
-                        display: isShowScales,
-                        scaleLabel: {
-                            display: isShowScales,
-                            labelString: xAxisLabel
-                        }
-                    }],
-                    yAxes: [{
-                        display: isShowScales,
-                        scaleLabel: {
-                            display: isShowScales,
-                            labelString: 'Amount'
-                        }
-                    }]
-                }
-            }
-        });
-    </script>
-{% endblock %}
+    {% endblock %}
 
 
