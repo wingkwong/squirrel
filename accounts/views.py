@@ -21,4 +21,4 @@ def register(request):
 
 
 def profile(request):
-    print("TODO")
+    return render(request, 'profile.html')
