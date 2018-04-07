@@ -24,52 +24,5 @@
     </form>
 </div>
 
-    <!--{% if records %}-->
-        <!--<table id="expense-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">-->
-            <!--<thead>-->
-                <!--<tr>-->
-                    <!--<th>Currency</th>-->
-                    <!--<th>Description</th>-->
-                    <!--<th>Type</th>-->
-                    <!--<th>Payment</th>-->
-                    <!--<th>Amount</th>-->
-                    <!--<th>Date</th>-->
-                    <!--<th></th>-->
-                <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-                 <!--{% if records %}-->
-                    <!--{% for record in records %}-->
-                        <!--<tr>-->
-                           <!--<td>{{record.currency}}</td>-->
-                            <!--<td>{{record.description}}</td>-->
-                            <!--<td>{{record.type}}</td>-->
-                            <!--<td>{{record.payment}}</td>-->
-                            <!--<td>{{record.amount}}</td>-->
-                            <!--<td>{{record.date}}</td>-->
-                            <!--<td>-->
-                                <!--<button type="submit" class="btn btn-default btn-sm">-->
-                                    <!--<a href="{% url 'tracker:update_expense' record.id %}">-->
-                                        <!--<span class="glyphicon glyphicon-edit"></span>-->
-                                    <!--</a>-->
-                                <!--</button>-->
-                                <!--<form class="delete_expense_form" action="{% url 'tracker:delete_expense' record.id %}" method="post">-->
-                                    <!--{% csrf_token %}-->
-                                    <!--<input type="hidden" name="expense_id" value="{{record.id}}">-->
-                                    <!--<button type="submit" class="btn btn-default btn-sm">-->
-                                        <!--<span class="glyphicon glyphicon-trash"></span>-->
-                                    <!--</button>-->
-                                <!--</form>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                    <!--{% endfor %}-->
-                 <!--{% endif %}-->
-            <!--</tbody>-->
-        <!--</table>-->
-
-    <!--{% else %}-->
-        <!--<h3>You don't have any records</h3>-->
-    <!--{% endif %}-->
-
 {% endblock %}
 </div>
