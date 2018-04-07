@@ -62,7 +62,16 @@ TBA
 - pip
 
 ## Installation
-TBA
+1. Fork this project
+2. Migrate
+```bash
+python manage.py migrate
+```
+3. Run
+```bash
+python manage.py runserver
+```
+
 
 ## Authors
 
