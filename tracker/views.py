@@ -211,7 +211,8 @@ class AnalyticsView(generic.ListView):
             amount = exp.filter(date__year=year).filter(date__month=(i+1)).values('date').distinct().order_by('date').aggregate(amount=Sum('amount'))['amount']
             if amount is not None:
                 expense_per_month.append(float("{0:.2f}".format(amount)))
-                month_not_none.append((i+1))
+                month_not_none.append((months[i]))
+
 
         if expense_per_month:
             submenu = zip(month_not_none, expense_per_month)
@@ -294,11 +295,14 @@ class AnalyticsView(generic.ListView):
         dates = list(exp.values('date')
                      .values_list('date', flat=True))
         month_arr = []
+        month_labels = []
         for date in dates:
             if date.month not in month_arr:
                 month_arr.append(date.month)
                 month_arr.sort()
-
+        
+        for single_month in month_arr:
+            month_labels.append(months[single_month - 1])
         # construct submenu
         expense_per_day = []
         day_not_none  = []
@@ -313,7 +317,7 @@ class AnalyticsView(generic.ListView):
             submenu = zip(day_not_none, expense_per_day)
         else:
             submenu = False
-        
+
         context = {
             'context_type': 'monthly',
             'datasets': datasets,
@@ -323,6 +327,7 @@ class AnalyticsView(generic.ListView):
             'report_type': 'bar',
             'selected_year':year ,
             'menu_labels': month_arr,
+            'month_labels': month_labels,
             'x_axis_label': 'Day',
             'submenu': submenu
         }

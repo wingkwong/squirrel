@@ -2,6 +2,8 @@
 
 {% load bootstrap3 %}
 
+{% load month_labels %}
+
 
 {% block body %}
 
@@ -86,7 +88,7 @@
                           <!--TODO: convert it to month str-->
                         <a class="annually nav-link" href="{% url 'tracker:analytics'%}/{{label}}"> {{label}}</a>
                       {% elif context_type == 'monthly'%}
-                        <a class="annually nav-link" href="{% url 'tracker:analytics'%}/{{selected_year}}/{{label}}"> {{label}}</a>
+                        <a class="annually nav-link" href="{% url 'tracker:analytics'%}/{{selected_year}}/{{label}}"> {{month_labels|get_by_index:label}}</a>
                       {% endif %}
                   </li>
                 {% endfor%}
