@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django_tables2',
     'django_filters',
     'bootstrap3',
-    'crispy_forms'
+    'crispy_forms',
+    'tracker.templatetags.month_labels'
 ]
 
 MIDDLEWARE = [
