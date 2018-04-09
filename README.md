@@ -63,11 +63,15 @@ TBA
 
 ## Installation
 1. Fork this project
-2. Migrate
+2. Make Migrations
+```bash
+python manage.py makemigrations
+```
+3. Migrate
 ```bash
 python manage.py migrate
 ```
-3. Run
+4. Run
 ```bash
 python manage.py runserver
 ```
