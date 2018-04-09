@@ -329,7 +329,8 @@ class AnalyticsView(generic.ListView):
             'menu_labels': month_arr,
             'month_labels': month_labels,
             'x_axis_label': 'Day',
-            'submenu': submenu
+            'submenu': submenu,
+            'months': months
         }
         return render(request, "analytics/index.html", context)
 
