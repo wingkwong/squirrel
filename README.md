@@ -16,6 +16,7 @@ A responsive web application for expense tracking and analytics powered by Djang
 * django_filters
 * bootstrap3
 * crispy_forms
+* tracker.templatetags.month_labels
 
 ## Configured URLs:
 
