@@ -72,11 +72,13 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-
 ## Authors
 
 * **Wing Kam WONG** -  [@wingkwong](https://github.com/wingkwong)
 
+## Contributor
+
+* **Tushar Kapoor** -  [@TusharKapoor23](https://github.com/TusharKapoor23)
 
 ## License
 
