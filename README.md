@@ -17,6 +17,7 @@ A responsive web application for expense tracking and analytics powered by Djang
 * bootstrap3
 * crispy_forms
 * tracker.templatetags.month_labels
+* social_django
 
 ## Configured URLs:
 
@@ -31,6 +32,7 @@ A responsive web application for expense tracking and analytics powered by Djang
 * ``/accounts/login``
 * ``/accounts/logout``
 * ``/accounts/profile/{id}``
+* ``/auth/``
 * ``/admin/``
 
 ## Templates:
@@ -53,6 +55,7 @@ Accounts:
 * Expense addition
 * Expense Analytics by year, month or day
 * Bootstrap 3 based
+* Google OAuth2
 
 ## Usage
 TBA
@@ -62,7 +65,7 @@ TBA
 - Python >= 3.5
 - pip
 
-## Installation
+## Setup Your Environment
 1. Fork this project
 2. Make Migrations
 ```bash
@@ -75,6 +78,19 @@ python manage.py migrate
 4. Run
 ```bash
 python manage.py runserver
+```
+
+## Setup Your Google OAuth
+1. Go to Google Developers Console(https://console.developers.google.com/apis/library?project=_) and create a new project
+2. Go to credentials tab
+3. Create Credentials and choose OAuth Client ID
+4. Select Web Application and enter any name in 'Product name shown to users' under OAuth Consent Screen tab
+5. Set `http://127.0.0.1:8000/auth/complete/google-oauth2/` in Authorized redirect URIs
+6. Under APIs and services tab, click on Google+ API and then click Enable
+7. Copy the Client ID and Client Secret Under settings.py
+```bash
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY='' # ClientKey
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=''# SecretKey
 ```
 
 ## Authors
