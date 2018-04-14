@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 from .forms import RegisterForm
 
 
@@ -21,4 +22,10 @@ def register(request):
 
 
 def profile(request):
-    return render(request, 'profile.html')
+    # Getting current user
+    user = User.objects.get(username=request.user)
+    # Passing User Profile to Profile Page
+    context = {
+        'profile': user.profile
+    }
+    return render(request, 'profile.html', context)
