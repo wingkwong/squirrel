@@ -396,3 +396,8 @@ class AnalyticsView(generic.ListView):
         }
         return render(request, "analytics/index.html", context)
 
+
+class landingView():
+    def landing(request):
+        context = {}
+        return render(request, "landing/index.html", context)

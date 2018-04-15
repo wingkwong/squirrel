@@ -5,7 +5,10 @@ from . import views
 app_name = 'tracker'
 
 urlpatterns = [
-    # /
+	# /
+    path('', views.landingView.landing, name ="landing"),
+
+    # /tracker
     path('tracker', login_required(views.IndexView.as_view()), name ="expense"),
 
     # /add
