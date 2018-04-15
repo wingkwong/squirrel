@@ -1,4 +1,4 @@
-# Django Expense Tracker
+# $quirrel :squirrel:
 
 ## About
 A responsive web application for expense tracking and analytics powered by Django
