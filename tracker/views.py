@@ -329,7 +329,8 @@ class AnalyticsView(generic.ListView):
             'menu_labels': month_arr,
             'month_labels': month_labels,
             'x_axis_label': 'Day',
-            'submenu': submenu
+            'submenu': submenu,
+            'months': months
         }
         return render(request, "analytics/index.html", context)
 
@@ -395,3 +396,8 @@ class AnalyticsView(generic.ListView):
         }
         return render(request, "analytics/index.html", context)
 
+
+class landingView():
+    def landing(request):
+        context = {}
+        return render(request, "landing/index.html", context)
