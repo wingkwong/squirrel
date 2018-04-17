@@ -85,7 +85,6 @@
                 {% for label in menu_labels %}
                   <li class="nav-item">
                       {% if context_type == 'annually' %}
-                          <!--TODO: convert it to month str-->
                         <a class="annually nav-link" href="{% url 'tracker:analytics'%}/{{label}}"> {{label}}</a>
                       {% elif context_type == 'monthly'%}
 
