@@ -1,5 +1,7 @@
 # Squirrel
 
+![](https://preview.ibb.co/b7GTNS/image.png)
+
 ## About
 A responsive web application for expense tracking and analytics platform powered by Django
 
