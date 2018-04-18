@@ -1,7 +1,7 @@
-# $quirrel :squirrel:
+# Squirrel
 
 ## About
-A responsive web application for expense tracking and analytics powered by Django
+A responsive web application for expense tracking and analytics platform powered by Django
 
 ## Installed apps:
 * django 2.0.2
@@ -21,6 +21,7 @@ A responsive web application for expense tracking and analytics powered by Djang
 
 ## Configured URLs:
 
+* ``/``
 * ``/tracker``
 * ``/tracker/add``
 * ``/tracker/update/{id}``
@@ -36,6 +37,9 @@ A responsive web application for expense tracking and analytics powered by Djang
 * ``/admin/``
 
 ## Templates:
+
+Landing:
+* ``landing/index.html``
 
 Tracker:
 * ``tracker/expense_form.html``
@@ -56,9 +60,6 @@ Accounts:
 * Expense Analytics by year, month or day
 * Bootstrap 3 based
 * Google OAuth2
-
-## Usage
-TBA
 
 ## Prerequisites
 
