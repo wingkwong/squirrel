@@ -24,9 +24,10 @@ class PagedFilteredTableView(SingleTableView):
         context[self.context_filter_name] = self.filter
         return context
 
-millnames = ['',' K',' M',' B',' T']
-
-def convertToMills(n):
-    n = float(n)
-    index = max(0, min(len(millnames) - 1, int(math.floor(0 if n == 0 else math.log10(abs(n))/3))))
-    return '{:.0f}{}'.format(n / 10**(3 * index), millnames[index])
+class AmountUnitUtil():
+    millnames = ['','K','M','B','T']
+    
+    def convertToMills(n):
+        n = float(n)
+        index = max(0, min(len(AmountUnitUtil.millnames) - 1, int(math.floor(0 if n == 0 else math.log10(abs(n))/3))))
+        return '{:.0f}{}'.format(n / 10**(3 * index), AmountUnitUtil.millnames[index])

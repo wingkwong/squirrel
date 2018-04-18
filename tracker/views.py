@@ -10,7 +10,7 @@ from .tables import ExpenseTable
 from .models import Expense
 from .forms import ExpenseTableHelper
 from .filters import ExpenseFilter
-from .utils import convertToMills
+from .utils import AmountUnitUtil
 import random
 from calendar import monthrange
 import datetime
@@ -118,10 +118,10 @@ class AnalyticsView(generic.ListView):
                 day_arr.append(date.day)
 
         if total_expenses > 0 :
-            avg_year = convertToMills(total_expenses / year_arr.__len__())
-            avg_month = convertToMills(total_expenses / month_arr.__len__())
-            avg_day = convertToMills(total_expenses / day_arr.__len__())
-            total_expenses = convertToMills(total_expenses)
+            avg_year = AmountUnitUtil.convertToMills(total_expenses / year_arr.__len__())
+            avg_month = AmountUnitUtil.convertToMills(total_expenses / month_arr.__len__())
+            avg_day = AmountUnitUtil.convertToMills(total_expenses / day_arr.__len__())
+            total_expenses = AmountUnitUtil.convertToMills(total_expenses)
 
         now = datetime.datetime.now()
 
