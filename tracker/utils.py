@@ -1,6 +1,6 @@
 from django_tables2 import SingleTableView
 from django_tables2.config import RequestConfig
-
+import math
 
 class PagedFilteredTableView(SingleTableView):
     filter_class = None
@@ -23,3 +23,11 @@ class PagedFilteredTableView(SingleTableView):
         context = super(PagedFilteredTableView, self).get_context_data()
         context[self.context_filter_name] = self.filter
         return context
+
+class AmountUnitUtil():
+    millnames = ['','K','M','B','T']
+    
+    def convertToMills(n):
+        n = float(n)
+        index = max(0, min(len(AmountUnitUtil.millnames) - 1, int(math.floor(0 if n == 0 else math.log10(abs(n))/3))))
+        return '{:.0f}{}'.format(n / 10**(3 * index), AmountUnitUtil.millnames[index])
