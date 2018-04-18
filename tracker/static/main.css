@@ -651,7 +651,7 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------*/
 #github {
   overflow: hidden;
-  background: linear-gradient(rgb(77, 9, 23, 0.8), rgb(89, 99, 104, 0.4)), url(../img/call-to-action-bg.jpg) fixed center center;
+  background: linear-gradient(rgb(77, 9, 23, 0.8), rgb(89, 99, 104, 0.4)) fixed center center;
   background-size: cover;
   padding: 80px 0;
 }
