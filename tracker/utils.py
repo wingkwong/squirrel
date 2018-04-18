@@ -24,7 +24,7 @@ class PagedFilteredTableView(SingleTableView):
         context[self.context_filter_name] = self.filter
         return context
 
-millnames = ['',' Thousand',' Million',' Billion',' Trillion']
+millnames = ['',' K',' M',' B',' T']
 
 def convertToMills(n):
     n = float(n)
