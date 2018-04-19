@@ -9,14 +9,19 @@
 		<div class="col-md-3">
 			<div class="profile-sidebar">
 				<div class="profile-userpic">
-					<img src={{profile.avatar}} class="img-responsive" alt="">
+					{% if profile.avatar != ''%}
+						<img class="img-responsive" alt="" src={{profile.avatar}} >
+					{% else %}
+					<!--TODO: Use Default avatar -->
+						<img class="img-responsive" alt="" src="https://dummyimage.com/600x400/000/fff" >
+					{% endif%}
 				</div>
 				<div class="profile-user">
 					<div class="profile-user-name">
-						{{user}}
+						{{profile.user}}
 					</div>
 					<div class="profile-user-email">
-						{{user.email}}
+						{{profile.user.email}}
 					</div>
 				</div>
 				<div class="profile-usermenu">
