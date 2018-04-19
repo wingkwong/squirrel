@@ -16,14 +16,15 @@
                 <p>Please login to see this page.</p>
                 {% endif %}
             {% endif %}
-            <img class="logo" src="https://dummyimage.com/200x200/000000/fff?text=logo goes here"/>
             <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
                 <div class="form-group">
-                  <td>{{ form.username }}</td>
+                    Username
+                  <span>{{ form.username }}</span>
                 </div>
                 <div class="form-group">
-                  <td>{{ form.password }}</td>
+                    Password
+                  <span>{{ form.password }}</span>
                 </div>
 
                 <div class="form-group">
@@ -34,7 +35,13 @@
 
             <br>
             <p><strong>-- OR --</strong></p>
-            <p><a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a></p>
+            <p>
+                <a href="{% url 'social:begin' 'google-oauth2' %}">
+                    <button class="loginBtn loginBtn--google">
+                      Login with Google
+                    </button>
+                </a>
+            </p>
 
             <p><a href="{% url 'password_reset' %}">Forget Password?</a></p>
             <p>Don't have an account? <a href="{% url 'password_reset' %}">Register here.</a></p>
