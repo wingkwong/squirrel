@@ -33,6 +33,11 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
                 <li>
+                    <a href="{% url 'tracker:dashboard' %}">
+                        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp; Dashboard
+                    </a>
+                </li>
+                <li>
                     <a href="{% url 'tracker:expense' %}">
                         <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp; Expense Overview
                     </a>

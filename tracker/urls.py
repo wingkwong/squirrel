@@ -8,6 +8,9 @@ urlpatterns = [
 	# /
     path('', views.landingView.landing, name ="landing"),
 
+    # /dashboard
+    path('dashboard', login_required(views.Dashboard.index), name="dashboard"),
+
     # /tracker
     path('tracker', login_required(views.IndexView.as_view()), name ="expense"),
 

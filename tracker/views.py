@@ -16,6 +16,14 @@ from calendar import monthrange
 import datetime
 
 
+class Dashboard():
+    template_name = "tracker/dashboard.html"
+
+    def index(request):
+        context = {}
+        return render(request, "tracker/dashboard.html", context)
+
+
 class IndexView(generic.ListView):
     template_name = "tracker/index.html"
     context_object_name = "records"
