@@ -114,6 +114,11 @@ a:hover{
     color: #ffffff;
 }
 
+.pager li>a, .pager li>span,
+.pager li>a:hover, .pager li>span:hover{
+    background: #4d0917;
+}
+
 .delete_expense_form{
     display: inline;
 }
