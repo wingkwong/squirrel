@@ -21,11 +21,12 @@ def register(request):
     return render(request, 'register.html', {'form': form})
 
 
-def profile(request):
-    # Getting current user
-    user = User.objects.get(username=request.user)
-    # Passing User Profile to Profile Page
-    context = {
-        'profile': user.profile
-    }
-    return render(request, 'profile.html', context)
+class ProfileView():
+    def profile(request):
+        # Getting current user
+        user = User.objects.get(username=request.user)
+        # Passing User Profile to Profile Page
+        context = {
+            'profile': user.profile
+        }
+        return render(request, 'profile.html', context)
