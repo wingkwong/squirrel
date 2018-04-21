@@ -20,7 +20,64 @@ class Dashboard():
     template_name = "tracker/dashboard.html"
 
     def index(request):
-        context = {}
+        # init
+        avg_year = 0
+        avg_month = 0
+        avg_day = 0
+
+        # get user expense objects
+        exp = Expense.objects.filter(created_by=request.user)
+
+        # count total record
+        total_records = exp.count()
+
+        # sum up all the expenses
+        total_expenses = exp.aggregate(amount=Sum('amount'))['amount']
+        if total_expenses is None:
+            total_expenses = 0
+
+        # categories count
+        categories = exp.values('type').annotate(the_count=Count('type')).count()
+
+        # list out dates for the following processing.
+        dates = list(exp.values('date')
+                     .values_list('date', flat=True))
+
+        # avg amount per year, per month and per day
+        year_arr = []
+        month_arr = []
+        day_arr = []
+
+        for date in dates:
+            if date.year not in year_arr:
+                year_arr.append(date.year)
+            if date.year not in month_arr:
+                month_arr.append(date.month)
+            if date.year not in day_arr:
+                day_arr.append(date.day)
+
+        if total_expenses > 0:
+            avg_year = AmountUnitUtil.convertToMills(total_expenses / year_arr.__len__())
+            avg_month = AmountUnitUtil.convertToMills(total_expenses / month_arr.__len__())
+            avg_day = AmountUnitUtil.convertToMills(total_expenses / day_arr.__len__())
+            total_expenses = AmountUnitUtil.convertToMills(total_expenses)
+
+        now = datetime.datetime.now()
+
+        context = {
+            'context_type': 'dashboard',
+            'total_records': total_records,
+            'total_expenses': total_expenses,
+            'categories': categories,
+            'avg_year': avg_year,
+            'avg_month': avg_month,
+            'avg_day': avg_day,
+            'current_year': now.year,
+            'current_month': now.month,
+            'current_day': now.day
+
+        }
+
         return render(request, "tracker/dashboard.html", context)
 
 
@@ -88,66 +145,6 @@ class AnalyticsView(generic.ListView):
     context_object_name = "records"
     model = Expense
 
-    def statistic(request):
-        # init
-        avg_year = 0
-        avg_month = 0
-        avg_day = 0
-
-        # get user expense objects
-        exp = Expense.objects.filter(created_by=request.user)
-
-        # count total record
-        total_records = exp.count()
-
-        # sum up all the expenses
-        total_expenses = exp.aggregate(amount=Sum('amount'))['amount']
-        if total_expenses is None:
-            total_expenses = 0
-
-        # categories count
-        categories = exp.values('type').annotate(the_count=Count('type')).count()
-
-        # list out dates for the following processing.
-        dates = list(exp.values('date')
-                     .values_list('date', flat=True))
-
-        # avg amount per year, per month and per day
-        year_arr = []
-        month_arr = []
-        day_arr = []
-
-        for date in dates:
-            if date.year not in year_arr:
-                year_arr.append(date.year)
-            if date.year not in month_arr:
-                month_arr.append(date.month)
-            if date.year not in day_arr:
-                day_arr.append(date.day)
-
-        if total_expenses > 0 :
-            avg_year = AmountUnitUtil.convertToMills(total_expenses / year_arr.__len__())
-            avg_month = AmountUnitUtil.convertToMills(total_expenses / month_arr.__len__())
-            avg_day = AmountUnitUtil.convertToMills(total_expenses / day_arr.__len__())
-            total_expenses = AmountUnitUtil.convertToMills(total_expenses)
-
-        now = datetime.datetime.now()
-
-        context = {
-            'context_type': 'statistic',
-            'total_records': total_records,
-            'total_expenses': total_expenses,
-            'categories': categories,
-            'avg_year': avg_year,
-            'avg_month': avg_month,
-            'avg_day': avg_day,
-            'current_year': now.year,
-            'current_month': now.month,
-            'current_day': now.day
-
-        }
-
-        return render(request, "analytics/index.html", context)
 
     def annually(request, year):
         # get user expense objects

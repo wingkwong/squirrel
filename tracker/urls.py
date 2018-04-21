@@ -24,7 +24,8 @@ urlpatterns = [
     path('tracker/delete/<int:pk>', login_required(views.ExpenseDelete.as_view()), name="delete_expense"),
 
     # /analytics
-    path('analytics', login_required(views.AnalyticsView.statistic), name="analytics"),
+    # FIXME: redirect to dashboard
+    path('analytics', login_required(views.Dashboard.index), name="analytics"),
 
     # /analytics/2018
     path('analytics/<int:year>', login_required(views.AnalyticsView.annually), name="annually"),
