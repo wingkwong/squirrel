@@ -37,6 +37,10 @@ a:hover{
     text-decoration: none;
 }
 
+.no-padding{
+    padding: 0;
+}
+
 /*
     Header
 */
@@ -206,51 +210,76 @@ a:hover{
     color: #ffffff;
 }
 
+.no-data{
+    text-align: center;
+    margin-top: 30px;
+}
 
-.analytics-card{
-    margin: 20px;
-    padding: 40px;
+/*
+    Dashboard
+*/
+
+
+.dashboard{
+    margin-top: -20px;
+}
+
+.dashboard-card{
+    margin: 0px;
+    padding: 10px;
     text-align: center;
     color: #ffffff;
     overflow: hidden;
 }
 
-.analytics-card.total-records{
+.dashboard .sub-header{
+    margin-bottom: 5px;
+}
+
+.dashboard-card.total-records{
     background-color: #343a40;
 }
 
-.analytics-card.total-expenses{
+.dashboard-card.total-expenses{
     background-color: #6610f2;
 }
 
-.analytics-card.categories{
+.dashboard-card.categories{
     background-color: #6f42c1;
 }
 
-.analytics-card.avg-year{
+.dashboard-card.avg-year{
     background-color: #dc3545;
 }
 
-.analytics-card.avg-month{
+.dashboard-card.avg-month{
     background-color: #17a2b8;
 }
 
-.analytics-card.avg-day{
+.dashboard-card.avg-day{
     background-color: #6c757d;
 }
 
-.analytics-card .header{
+.dashboard-card.annually-report{
+    background-color: #666ad1;
+}
+
+.dashboard-card.monthly-report{
+    background-color: #df78ef;
+}
+
+.dashboard-card.daily-report{
+    background-color: #009faf;
+}
+
+.dashboard-card .header{
     font-size: 40px;
 }
 
-.analytics-card .content{
+.dashboard-card .content{
     font-size: 14px;
 }
 
-.no-data{
-    text-align: center;
-    margin-top: 30px;
-}
 
 /* Profile container */
 .profile {
