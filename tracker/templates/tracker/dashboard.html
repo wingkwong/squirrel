@@ -1,0 +1,93 @@
+{% extends 'tracker/base.html'%}
+{% load bootstrap3 %}
+
+
+{% block body %}
+<div class=" dashboard">
+        {% if context_type == 'dashboard'%}
+            <section>
+                <div class="row">
+                    <div class="col-md-4 no-padding">
+                         <div class="dashboard-card total-records">
+                            <div class="header">{{total_records}}</div>
+                            <div class="content">
+                                <div class="sub-header">Total Records</div>
+                                <div class="this-month col-md-6">This month: </div>
+                                <div class="col-md-6">3 (TODO)</div>
+                                <div class="last-month col-md-6">Last month:</div>
+                                <div class="col-md-6">3 (TODO)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 no-padding">
+                        <div class="dashboard-card total-expenses">
+                            <div class="header">${{total_expenses}}</div>
+                            <div class="content">
+                                <div class="sub-header">Total Expenses</div>
+                                <div class="this-month col-md-6">This month: </div>
+                                <div class="col-md-6">$3,024 (TODO)</div>
+                                <div class="last-month col-md-6">Last month:</div>
+                                <div class="col-md-6">$5,032 (TODO)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 no-padding">
+                        <div class="dashboard-card categories">
+                            <div class="header">{{categories}}</div>
+                                <div class="sub-header">Categories</div>
+                                <div class="this-month col-md-6">This month: </div>
+                                <div class="col-md-6">5 (TODO)</div>
+                                <div class="last-month col-md-6">Last month:</div>
+                                <div class="col-md-6">3 (TODO)</div>
+                            </div>
+                        </div>
+                    <div class="col-md-4 no-padding">
+                        <div class="dashboard-card avg-year">
+                            <div class="header">${{avg_year}}</div>
+                            <div class="content">Avg. year</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 no-padding">
+                        <div class="dashboard-card avg-month">
+                            <div class="header">${{avg_month}}</div>
+                            <div class="content">Avg. month</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 no-padding">
+                        <div class="dashboard-card avg-day">
+                            <div class="header">${{avg_day}}</div>
+                            <div class="content">Avg. day</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                <div class="col-md-4 no-padding">
+                    <a href="{% url 'tracker:analytics'%}/{{current_year}}">
+                        <div class="dashboard-card annually-report">
+                            <div class="header">annually Report</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 no-padding">
+                    <a href="{% url 'tracker:analytics'%}/{{current_year}}/{{current_month}}">
+                        <div class="dashboard-card monthly-report">
+                            <div class="header">Monthly Report</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 no-padding">
+                    <a href="{% url 'tracker:analytics'%}/{{current_year}}/{{current_month}}/{{current_day}}">
+                        <div class="dashboard-card daily-report">
+                            <div class="header">Daily Report</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            </section>
+        {% endif %}
+</div>
+
+{% endblock %}
+</div>
