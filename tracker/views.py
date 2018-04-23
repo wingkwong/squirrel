@@ -64,6 +64,21 @@ class Dashboard():
 
         now = datetime.datetime.now()
 
+        # Get Latest 30 days records
+
+        latest30DaysArr = list(exp.filter(created_at__lte=datetime.datetime.today(),
+                                       created_at__gt=datetime.datetime.today() - datetime.timedelta(days=30))
+                            .values('date').distinct().order_by('date').values_list('date', flat=True))
+
+        latest30DaysLabel = []
+        for day in latest30DaysArr:
+            latest30DaysLabel.append(day.strftime('%d/%m'))
+
+
+        latest30DaysData = list(exp.filter(created_at__lte=datetime.datetime.today(), created_at__gt=datetime.datetime.today()-datetime.timedelta(days=30))
+                             .values('date').distinct().order_by('date')
+                             .annotate(amount=Sum('amount')).values_list('amount', flat=True))
+
         context = {
             'context_type': 'dashboard',
             'total_records': total_records,
@@ -74,7 +89,9 @@ class Dashboard():
             'avg_day': avg_day,
             'current_year': now.year,
             'current_month': now.month,
-            'current_day': now.day
+            'current_day': now.day,
+            'latest30DaysLabel': latest30DaysLabel,
+            'latest30DaysData': latest30DaysData
 
         }
 

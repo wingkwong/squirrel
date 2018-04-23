@@ -236,6 +236,11 @@ a:hover{
     margin-bottom: 5px;
 }
 
+.dashboard canvas{
+    background: #4a148c;
+    color: #e5ffff;
+}
+
 .dashboard-card.total-records{
     background-color: #343a40;
 }

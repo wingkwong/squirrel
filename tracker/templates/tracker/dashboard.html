@@ -61,6 +61,61 @@
                     </div>
                 </div>
             </section>
+
+            {% if latest30DaysData %}
+                <section>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <canvas id="latest30DaysExpense" width="500" height="100"></canvas>
+                            <script>
+                                var ctx = document.getElementById("latest30DaysExpense").getContext('2d');
+                                var latest30daysRecords = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        "labels": {{ latest30DaysLabel | safe }},
+                                      "datasets":[
+                                         {
+                                            "label":"Amount",
+                                            "data": {{ latest30DaysData | safe }},
+                                            "fill":false,
+                                            "borderColor":"#e5ffff",
+                                            "lineTension":0.1
+                                         }
+                                      ]
+                                    },
+                                    options: {
+                                        legend: {
+                                             labels: {
+                                                  fontColor: "#e5ffff"
+                                                 }
+                                              },
+                                            title: {
+                                                display: true,
+                                                fontColor: "#e5ffff",
+                                                text: 'Expenses in Last 30 Days'
+                                            }     ,
+                                            scales: {
+                                                yAxes: [{
+                                                    ticks: {
+                                                        beginAtZero:true,
+                                                        fontColor: "#e5ffff"
+                                                    },
+                                                }],
+                                              xAxes: [{
+                                                    ticks: {
+                                                        fontColor: "#e5ffff"
+                                                    },
+                                                }]
+                                        }
+
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+
             <section>
                 <div class="row">
                 <div class="col-md-4 no-padding">
@@ -86,6 +141,7 @@
                 </div>
             </div>
             </section>
+
         {% endif %}
 </div>
 
