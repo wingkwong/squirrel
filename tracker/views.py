@@ -25,11 +25,23 @@ class Dashboard():
         avg_month = 0
         avg_day = 0
 
+        now = datetime.datetime.now()
+
         # get user expense objects
         exp = Expense.objects.filter(created_by=request.user)
 
         # count total record
         total_records = exp.count()
+
+        # count total record in this month
+        current_month = now.month
+        total_records_in_this_month = exp.filter(created_at__month=current_month).count()
+
+        # count total record in last month
+        last_month = now.month - 1
+        if last_month<0:
+            last_month = 11
+        total_records_in_last_month = exp.filter(created_at__month=last_month).count()
 
         # sum up all the expenses
         total_expenses = exp.aggregate(amount=Sum('amount'))['amount']
@@ -62,8 +74,6 @@ class Dashboard():
             avg_day = AmountUnitUtil.convertToMills(total_expenses / day_arr.__len__())
             total_expenses = AmountUnitUtil.convertToMills(total_expenses)
 
-        now = datetime.datetime.now()
-
         # Get Latest 30 days records
 
         latest30DaysArr = list(exp.filter(created_at__lte=datetime.datetime.today(),
@@ -91,7 +101,9 @@ class Dashboard():
             'current_month': now.month,
             'current_day': now.day,
             'latest30DaysLabel': latest30DaysLabel,
-            'latest30DaysData': latest30DaysData
+            'latest30DaysData': latest30DaysData,
+            'totalRecordsInThisMonth': total_records_in_this_month,
+            'totalRecordsInLastMonth': total_records_in_last_month
 
         }
 
