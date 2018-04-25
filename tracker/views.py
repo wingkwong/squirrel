@@ -49,17 +49,29 @@ class Dashboard():
             total_expenses = 0
 
         # sum up all the expenses in this month
-        total_expenses_in_this_month = exp.filter(created_at__month=last_month).aggregate(amount=Sum('amount'))['amount']
+        total_expenses_in_this_month = exp.filter(created_at__month=current_month).aggregate(amount=Sum('amount'))['amount']
         if total_expenses_in_this_month is None:
             total_expenses = 0
 
         # sum up all the expenses in last month
-        total_expenses_in_last_month = exp.filter(created_at__month=current_month).aggregate(amount=Sum('amount'))['amount']
+        total_expenses_in_last_month = exp.filter(created_at__month=last_month).aggregate(amount=Sum('amount'))['amount']
         if total_expenses_in_last_month is None:
             total_expenses_in_last_month = 0
 
         # categories count
         categories = exp.values('type').annotate(the_count=Count('type')).count()
+        if categories is None:
+            categories = 0
+
+        # categories count in this month
+        categories_in_this_month = exp.filter(created_at__month=current_month).values('type').annotate(the_count=Count('type')).count()
+        if categories_in_this_month is None:
+            categories_in_this_month = 0
+
+        # categories count in last month
+        categories_in_last_month = exp.filter(created_at__month=last_month).values('type').annotate(the_count=Count('type')).count()
+        if categories_in_last_month is None:
+            categories_in_last_month = 0
 
         # list out dates for the following processing.
         dates = list(exp.values('date')
@@ -115,7 +127,9 @@ class Dashboard():
             'totalRecordsInThisMonth': total_records_in_this_month,
             'totalRecordsInLastMonth': total_records_in_last_month,
             'totalExpensesInThisMonth': float("{0:.2f}".format(total_expenses_in_this_month)),
-            'totalExpensesInLastMonth': float("{0:.2f}".format(total_expenses_in_last_month))
+            'totalExpensesInLastMonth': float("{0:.2f}".format(total_expenses_in_last_month)),
+            'categories_in_this_month': categories_in_this_month,
+            'categories_in_last_month': categories_in_last_month
 
         }
 
