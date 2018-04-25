@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-md-4 no-padding">
                         <div class="dashboard-card categories">
-                            <div class="header">{{categories}}</div>
+                            <div class="header">{{categories_cnt}}</div>
                                 <div class="sub-header">Categories</div>
                                 <div class="this-month col-md-6">This month: </div>
                                 <div class="col-md-6">{{categories_in_this_month}}</div>
@@ -62,11 +62,100 @@
                 </div>
             </section>
 
+            {% if categories %}
+                <section>
+                    <div class="row">
+                        <div class="col-md-6 no-padding">
+                            <canvas id="allCategories" class="allCategories" width="300" height="150"></canvas>
+                            <script>
+                                var ctx = document.getElementById("allCategories").getContext('2d');
+                                var allCategories = new Chart(ctx, {
+                                    type: 'doughnut',
+                                    data: {
+                                        "labels": {{ categories | safe }},
+                                            "datasets":[
+                                             {
+                                                "data": {{ categories_record_cnt | safe }},
+                                                  backgroundColor: {{categories_color_arr| safe }}
+                                             }
+                                      ]
+                                    },
+
+                                    options: {
+                                        legend: {
+                                             labels: {
+                                                  fontColor: "#e5ffff"
+                                                 }
+                                              },
+                                            title: {
+                                                display: true,
+                                                fontColor: "#e5ffff",
+                                                text: 'Categories'
+                                            }
+                                    }
+                                });
+                            </script>
+                        </div>
+                        <div class="col-md-6 no-padding">
+                            <canvas id="allCategoriesRadar" class="allCategoriesRadar" width="300" height="150"></canvas>
+                            <script>
+                                var ctx = document.getElementById("allCategoriesRadar").getContext('2d');
+                                var allCategories = new Chart(ctx, {
+                                    type: 'radar',
+                                    data: {
+                                        "labels": {{ categories | safe }},
+                                            "datasets":[
+                                             {
+                                                "label":"Categories",
+                                                "data": {{ categories_expense | safe }},
+                                                "fill": true,
+                                                 "backgroundColor": "#fff",
+                                                "borderColor": "#fff;",
+                                             }
+                                      ]
+                                    },
+
+                                   "options": {
+                                   legend : {
+                                        labels : {
+                                          fontColor : '#ffffff'
+                                        }
+                                    },
+                                    scale:{
+                                        pointLabels:{
+                                           fontColor:"#fff",
+                                        },
+                                        ticks: {
+                                            display: false
+                                        }
+                                    },
+                                    "elements": {
+                                        "line": {
+                                            "tension": 0,
+                                            "borderWidth": 3
+                                        }
+                                    },
+                                    title: {
+                                                display: true,
+                                                fontColor: "#fff",
+                                                text: 'Expenses per Category'
+                                            }
+                                }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+
+
+
+
             {% if latest30DaysData %}
                 <section>
                     <div class="row">
                         <div class="col-md-12">
-                            <canvas id="latest30DaysExpense" width="500" height="100"></canvas>
+                            <canvas id="latest30DaysExpense" class="latest30DaysExpense" width="500" height="100"></canvas>
                             <script>
                                 var ctx = document.getElementById("latest30DaysExpense").getContext('2d');
                                 var latest30daysRecords = new Chart(ctx, {

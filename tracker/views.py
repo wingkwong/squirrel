@@ -58,10 +58,27 @@ class Dashboard():
         if total_expenses_in_last_month is None:
             total_expenses_in_last_month = 0
 
+        # get all categories
+        categories = list(exp.values('type').distinct().order_by().values_list('type', flat=True))
+
+        # get categories record count
+        categories_record_cnt = list(exp.values('type').annotate(the_count=Count('type')).order_by().values_list('the_count', flat=True))
+
         # categories count
-        categories = exp.values('type').annotate(the_count=Count('type')).count()
-        if categories is None:
-            categories = 0
+        categories_cnt = exp.values('type').annotate(the_count=Count('type')).count()
+        if categories_cnt is None:
+            categories_cnt = 0
+
+        # total expense per category
+        categories_expense = list(exp.values('type').annotate(the_count=Sum('amount')).order_by().values_list('the_count', flat=True))
+        print(categories_expense)
+
+        categories_color_arr = []
+        for cat in categories:
+            # generate random color
+            r = lambda: random.randint(0, 255)
+            color = '#%02X%02X%02X' % (r(), r(), r())
+            categories_color_arr.append(color)
 
         # categories count in this month
         categories_in_this_month = exp.filter(created_at__month=current_month).values('type').annotate(the_count=Count('type')).count()
@@ -116,6 +133,10 @@ class Dashboard():
             'total_records': total_records,
             'total_expenses': total_expenses,
             'categories': categories,
+            'categories_record_cnt': categories_record_cnt,
+            'categories_cnt': categories_cnt,
+            'categories_expense': categories_expense,
+            'categories_color_arr': categories_color_arr,
             'avg_year': avg_year,
             'avg_month': avg_month,
             'avg_day': avg_day,

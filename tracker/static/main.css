@@ -236,9 +236,18 @@ a:hover{
     margin-bottom: 5px;
 }
 
-.dashboard canvas{
+.dashboard .latest30DaysExpense{
     background: #4a148c;
     color: #e5ffff;
+}
+
+.dashboard .allCategories {
+    background: #790e8b;
+}
+
+.dashboard .allCategoriesRadar{
+    background: #12005e;
+    color: #fff;
 }
 
 .dashboard-card.total-records{
