@@ -66,11 +66,11 @@
                 <section>
                     <div class="row">
                         <div class="col-md-6 no-padding">
-                            <canvas id="allCategories" class="allCategories" width="300" height="150"></canvas>
+                            <canvas id="allCategories" class="allCategories" ></canvas>
                             <script>
                                 var ctx = document.getElementById("allCategories").getContext('2d');
                                 var allCategories = new Chart(ctx, {
-                                    type: 'doughnut',
+                                    type: 'pie',
                                     data: {
                                         "labels": {{ categories | safe }},
                                             "datasets":[
@@ -97,7 +97,7 @@
                             </script>
                         </div>
                         <div class="col-md-6 no-padding">
-                            <canvas id="allCategoriesRadar" class="allCategoriesRadar" width="300" height="150"></canvas>
+                            <canvas id="allCategoriesRadar" class="allCategoriesRadar"></canvas>
                             <script>
                                 var ctx = document.getElementById("allCategoriesRadar").getContext('2d');
                                 var allCategories = new Chart(ctx, {
