@@ -5,7 +5,6 @@ from django_tables2 import RequestConfig
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.db.models import Sum, Count
-from django.db import models
 from .tables import ExpenseTable
 from .models import Expense
 from .forms import ExpenseTableHelper
@@ -59,10 +58,10 @@ class Dashboard():
             total_expenses_in_last_month = 0
 
         # get all categories
-        categories = list(exp.values('type').distinct().order_by().values_list('type', flat=True))
+        categories = list(exp.values('type').distinct().order_by('type').values_list('type', flat=True))
 
         # get categories record count
-        categories_record_cnt = list(exp.values('type').annotate(the_count=Count('type')).order_by().values_list('the_count', flat=True))
+        categories_record_cnt = list(exp.values('type').annotate(the_count=Count('type')).order_by('type').values_list('the_count', flat=True))
 
         # categories count
         categories_cnt = exp.values('type').annotate(the_count=Count('type')).count()
@@ -70,8 +69,7 @@ class Dashboard():
             categories_cnt = 0
 
         # total expense per category
-        categories_expense = list(exp.values('type').annotate(the_count=Sum('amount')).order_by().values_list('the_count', flat=True))
-        print(categories_expense)
+        categories_expense = list(exp.values('type').order_by('type').annotate(the_count=Sum('amount')).values_list('the_count', flat=True))
 
         categories_color_arr = []
         for cat in categories:
@@ -221,7 +219,6 @@ class AnalyticsView(generic.ListView):
     context_object_name = "records"
     model = Expense
 
-
     def annually(request, year):
         # get user expense objects
         exp = Expense.objects.filter(created_by=request.user)
@@ -318,6 +315,9 @@ class AnalyticsView(generic.ListView):
         # get user expense objects
         exp = Expense.objects.filter(created_by=request.user)
 
+        expense_table_in_month_view = ExpenseTable(exp.filter(date__year=year).filter(date__month=month))
+        expense_table_in_month_view.paginate(page=request.GET.get('page', 1), per_page=10)
+
         months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
                   "November", "December"]
         months_reverse = dict(January=1, February=2, March=3, April=4)
@@ -332,7 +332,8 @@ class AnalyticsView(generic.ListView):
 
         for type in expense_type:
             # expense
-            arr = list(exp.filter(date__year=year).filter(date__month=month).filter(type=type).distinct().order_by('date'))
+            expense_queryset = exp.filter(date__year=year).filter(date__month=month).filter(type=type).distinct().order_by('date')
+            arr = list(expense_queryset)
 
             # expense month by type
             month_tmp_arr = list(exp.filter(date__year=year).filter(date__month=month).filter(type=type).values('date').distinct()
@@ -412,13 +413,18 @@ class AnalyticsView(generic.ListView):
             'month_labels': month_labels,
             'x_axis_label': 'Day',
             'submenu': submenu,
-            'months': months
+            'months': months,
+            'expense_table_in_month_view': expense_table_in_month_view
         }
         return render(request, "analytics/index.html", context)
 
     def daily(request, year, month, day):
         # get user expense objects
         exp = Expense.objects.filter(created_by=request.user)
+
+        # expense table
+        expense_table_in_daily_view = ExpenseTable(exp.filter(date__year=year).filter(date__month=month).filter(date__day=day))
+        expense_table_in_daily_view.paginate(page=request.GET.get('page', 1), per_page=10)
 
         type =[]
         # retrieve distinct types
@@ -474,7 +480,8 @@ class AnalyticsView(generic.ListView):
             'title': 'Daily Report on ' + str(day) + '/' + str(month) + '/' + str(year) ,
             'x_axis_label': 'Type',
             'report_type': 'pie',
-            'submenu': submenu
+            'submenu': submenu,
+            'expense_table_in_daily_view': expense_table_in_daily_view
         }
         return render(request, "analytics/index.html", context)
 
