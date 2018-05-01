@@ -101,12 +101,11 @@
                             <script>
                                 var ctx = document.getElementById("allCategoriesRadar").getContext('2d');
                                 var allCategories = new Chart(ctx, {
-                                    type: 'radar',
+                                    type: 'horizontalBar',
                                     data: {
                                         "labels": {{ categories | safe }},
-                                            "datasets":[
+                                         "datasets":[
                                              {
-                                                "label":"Categories",
                                                 "data": {{ categories_expense | safe }},
                                                 "fill": true,
                                                  "backgroundColor": "#fff",
@@ -114,32 +113,41 @@
                                              }
                                       ]
                                     },
-
-                                   "options": {
-                                   legend : {
-                                        labels : {
-                                          fontColor : '#ffffff'
-                                        }
+                                    options: {
+                                    legend: {
+                                        display: false
                                     },
-                                    scale:{
-                                        pointLabels:{
-                                           fontColor:"#fff",
-                                        },
-                                        ticks: {
-                                            display: false
-                                        }
-                                    },
-                                    "elements": {
-                                        "line": {
-                                            "tension": 0,
-                                            "borderWidth": 3
-                                        }
-                                    },
+                                    responsive: true,
                                     title: {
+                                        display: true,
+                                        text: 'Expenses per Categories'
+                                    },
+                                    tooltips: {
+                                        mode: 'index',
+                                        intersect: false,
+                                    },
+                                    hover: {
+                                        mode: 'nearest',
+                                        intersect: true
+                                    }
+                                    ,
+                                    scales: {
+                                        xAxes: [{
+                                            display: true,
+                                            scaleLabel: {
                                                 display: true,
-                                                fontColor: "#fff",
-                                                text: 'Expenses per Category'
+                                                labelString: "Amount"
                                             }
+                                        }],
+                                        yAxes: [{
+                                        stacked: true,
+                                            display: true,
+                                            scaleLabel: {
+                                                display: true,
+                                                labelString: 'Categories'
+                                            }
+                                        }]
+                                    }
                                 }
                                 });
                             </script>

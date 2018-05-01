@@ -59,7 +59,7 @@ class Dashboard():
 
         # get all categories
         categories = list(exp.values('type').distinct().order_by('type').values_list('type', flat=True))
-
+        print(categories)
         # get categories record count
         categories_record_cnt = list(exp.values('type').annotate(the_count=Count('type')).order_by('type').values_list('the_count', flat=True))
 
