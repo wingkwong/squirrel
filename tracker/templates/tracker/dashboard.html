@@ -34,7 +34,7 @@
                     <div class="col-md-4 no-padding">
                         <div class="dashboard-card categories">
                             <div class="header">{{categories_cnt}}</div>
-                                <div class="sub-header">Categories</div>
+                                <div class="sub-header">Total Categories</div>
                                 <div class="this-month col-md-6">This month: </div>
                                 <div class="col-md-6">{{categories_in_this_month}}</div>
                                 <div class="last-month col-md-6">Last month:</div>
@@ -120,6 +120,7 @@
                                     responsive: true,
                                     title: {
                                         display: true,
+                                             fontColor: "#e5ffff",
                                         text: 'Expenses per Categories'
                                     },
                                     tooltips: {
@@ -136,16 +137,24 @@
                                             display: true,
                                             scaleLabel: {
                                                 display: true,
-                                                labelString: "Amount"
-                                            }
+                                                labelString: "Amount",
+                                                 fontColor: "#e5ffff",
+                                            },
+                                            ticks: {
+                                              fontColor: "#fff",
+                                            },
                                         }],
                                         yAxes: [{
                                         stacked: true,
                                             display: true,
                                             scaleLabel: {
                                                 display: true,
-                                                labelString: 'Categories'
-                                            }
+                                                labelString: 'Categories',
+                                                 fontColor: "#e5ffff",
+                                            },
+                                            ticks: {
+                                              fontColor: "#fff",
+                                            },
                                         }]
                                     }
                                 }
