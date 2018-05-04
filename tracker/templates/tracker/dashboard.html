@@ -1,73 +1,101 @@
 {% extends 'tracker/base.html'%}
-{% load bootstrap3 %}
-
-
 {% block body %}
-<div class=" dashboard">
-        {% if context_type == 'dashboard'%}
-            <section>
-                <div class="row">
-                    <div class="col-md-4 no-padding">
-                         <div class="dashboard-card total-records">
-                            <div class="header">{{total_records}}</div>
-                            <div class="content">
-                                <div class="sub-header">Total Records</div>
-                                <div class="this-month col-md-6">This month: </div>
-                                <div class="col-md-6">{{totalRecordsInThisMonth}}</div>
-                                <div class="last-month col-md-6">Last month:</div>
-                                <div class="col-md-6">{{totalRecordsInLastMonth}}</div>
-                            </div>
-                        </div>
+<div class="dashboard">
+    {% if context_type == 'dashboard'%}
+    <section>
+        <div class="row">
+            <div class="col s12 m6 l3">
+                <div class="card">
+                    <div class="card-content cyan white-text">
+                        <p class="card-stats-title">
+                            Total Records</p>
+                        <h4 class="card-stats-number">{{total_records}}</h4>
+                        <p class="card-stats-compare">
+                            <i class="material-icons">keyboard_arrow_up</i> 15% (TODO)
+                            <span class="cyan text text-lighten-5">from yesterday</span>
+                        </p>
                     </div>
-                    <div class="col-md-4 no-padding">
-                        <div class="dashboard-card total-expenses">
-                            <div class="header">${{total_expenses}}</div>
-                            <div class="content">
-                                <div class="sub-header">Total Expenses</div>
-                                <div class="this-month col-md-6">This month: </div>
-                                <div class="col-md-6">${{totalExpensesInThisMonth}}</div>
-                                <div class="last-month col-md-6">Last month:</div>
-                                <div class="col-md-6">${{totalExpensesInLastMonth}}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 no-padding">
-                        <div class="dashboard-card categories">
-                            <div class="header">{{categories_cnt}}</div>
-                                <div class="sub-header">Total Categories</div>
-                                <div class="this-month col-md-6">This month: </div>
-                                <div class="col-md-6">{{categories_in_this_month}}</div>
-                                <div class="last-month col-md-6">Last month:</div>
-                                <div class="col-md-6">{{categories_in_last_month}}</div>
-                            </div>
-                        </div>
-                    <div class="col-md-4 no-padding">
-                        <div class="dashboard-card avg-year">
-                            <div class="header">${{avg_year}}</div>
-                            <div class="content">Avg. year</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 no-padding">
-                        <div class="dashboard-card avg-month">
-                            <div class="header">${{avg_month}}</div>
-                            <div class="content">Avg. month</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 no-padding">
-                        <div class="dashboard-card avg-day">
-                            <div class="header">${{avg_day}}</div>
-                            <div class="content">Avg. day</div>
-                        </div>
+                    <div class="card-action cyan white-text">
+                        <div class="this-month col m6">This month:</div>
+                        <div>{{totalRecordsInThisMonth}}</div>
+                        <div class="last-month col m6">Last month:</div>
+                        <div>{{totalRecordsInLastMonth}}</div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            {% if categories %}
-                <section>
-                    <div class="row">
-                        <div class="col-md-6 no-padding">
-                            <canvas id="allCategories" class="allCategories" ></canvas>
-                            <script>
+            <div class="col s12 m6 l3">
+                <div class="card">
+                    <div class="card-content red accent-2 white-text">
+                        <p class="card-stats-title">
+                            Total Expenses</p>
+                        <h4 class="card-stats-number">${{total_expenses}}</h4>
+                        <p class="card-stats-compare">
+                            <i class="material-icons">keyboard_arrow_up</i> 70% (TODO)
+                            <span class="red-text text-lighten-5">last month</span>
+                        </p>
+                    </div>
+                    <div class="card-action red white-text">
+                        <div class="this-month col m6">This month:</div>
+                        <div>${{totalExpensesInThisMonth}}</div>
+                        <div class="last-month col m6">Last month:</div>
+                        <div>${{totalExpensesInLastMonth}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m6 l3">
+                <div class="card">
+                    <div class="card-content teal accent-4 white-text">
+                        <p class="card-stats-title">
+                            Total Categories</p>
+                        <h4 class="card-stats-number">{{categories_cnt}}</h4>
+                        <p class="card-stats-compare">
+                            <i class="material-icons">keyboard_arrow_up</i> 80% (TODO)
+                            <span class="teal-text text-lighten-5">from last month</span>
+                        </p>
+                    </div>
+                    <div class="card-action teal white-text">
+                        <div class="this-month col m6">This month:</div>
+                        <div>{{categories_in_this_month}}</div>
+                        <div class="last-month col m6">Last month:</div>
+                        <div>{{categories_in_last_month}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m6 l3">
+                <div class="card">
+                    <div class="card-content deep-orange accent-2 white-text">
+                        <p class="card-stats-title">
+                            Avg. year</p>
+                        <h4 class="card-stats-number">{{avg_year}}</h4>
+                        <p class="card-stats-compare">
+                            <i class="material-icons">keyboard_arrow_down</i> 3%
+                            <span class="deep-orange-text text-lighten-5">from last month</span>
+                        </p>
+                    </div>
+                    <div class="card-action  deep-orange white-text">
+                        <div class="this-month col m6">Avg. month:</div>
+                        <div>${{avg_month}}</div>
+                        <div class="last-month col m6">Avg. day:</div>
+                        <div>${{avg_day}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if categories %}
+    <section class="chart-dashboard">
+        <div class="row">
+            <div class="col s12 m8 l8">
+                <div class="card">
+                    <div class="card-move-up waves-effect waves-block waves-light">
+                        <div class="move-up cyan darken-1">
+                            <div>
+                                <canvas id="allCategories" class="allCategories"></canvas>
+                                <script>
                                 var ctx = document.getElementById("allCategories").getContext('2d');
                                 var allCategories = new Chart(ctx, {
                                     type: 'pie',
@@ -94,9 +122,22 @@
                                             }
                                     }
                                 });
-                            </script>
+
+
+                                </script>
+                            </div>
+
                         </div>
-                        <div class="col-md-6 no-padding">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col s12 m4 l4">
+                <div class="card">
+                    <div class="card-move-up teal accent-4 waves-effect waves-block waves-light">
+                        <div class="move-up card-content teal">
+                            <p class="margin white-text">Expenses per Categories</p>
                             <canvas id="allCategoriesRadar" class="allCategoriesRadar"></canvas>
                             <script>
                                 var ctx = document.getElementById("allCategoriesRadar").getContext('2d');
@@ -118,11 +159,6 @@
                                         display: false
                                     },
                                     responsive: true,
-                                    title: {
-                                        display: true,
-                                             fontColor: "#e5ffff",
-                                        text: 'Expenses per Categories'
-                                    },
                                     tooltips: {
                                         mode: 'index',
                                         intersect: false,
@@ -159,21 +195,32 @@
                                     }
                                 }
                                 });
+
+
                             </script>
                         </div>
                     </div>
-                </section>
-            {% endif %}
+                    <div class="card-content  teal">
+                        <div class="line-chart-wrapper">
+                            <p class="margin white-text">TODO-FEATURE</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
 
 
-
-
-            {% if latest30DaysData %}
-                <section>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <canvas id="latest30DaysExpense" class="latest30DaysExpense" width="500" height="100"></canvas>
-                            <script>
+    {% if latest30DaysData %}
+    <section>
+        <div class="row">
+            <div class="col m12">
+                <div class="card">
+                    <div class="card-move-up teal accent-4 waves-effect waves-block waves-light">
+                                        <canvas id="latest30DaysExpense" class="latest30DaysExpense" width="500" height="100"></canvas>
+                <script>
                                 var ctx = document.getElementById("latest30DaysExpense").getContext('2d');
                                 var latest30daysRecords = new Chart(ctx, {
                                     type: 'line',
@@ -216,39 +263,54 @@
 
                                     }
                                 });
-                            </script>
-                        </div>
-                    </div>
-                </section>
-            {% endif %}
 
-            <section>
-                <div class="row">
-                <div class="col-md-4 no-padding">
-                    <a href="{% url 'tracker:analytics'%}/{{current_year}}">
-                        <div class="dashboard-card annually-report">
-                            <div class="header">annually Report</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 no-padding">
-                    <a href="{% url 'tracker:analytics'%}/{{current_year}}/{{current_month}}">
-                        <div class="dashboard-card monthly-report">
-                            <div class="header">Monthly Report</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 no-padding">
-                    <a href="{% url 'tracker:analytics'%}/{{current_year}}/{{current_month}}/{{current_day}}">
-                        <div class="dashboard-card daily-report">
-                            <div class="header">Daily Report</div>
-                        </div>
-                    </a>
+
+                </script>
+                    </div>
                 </div>
             </div>
-            </section>
+        </div>
+    </section>
+    {% endif %}
 
-        {% endif %}
+    <section>
+        <div class="row">
+        <div class="col s12 m4">
+          <div class="card gradient-45deg-purple-deep-orange border-radius-3">
+            <div class="card-content center">
+              <a href="{% url 'tracker:analytics'%}/{{current_year}}">
+                    <div class="dashboard-card annually-report">
+                        <div class="white-text">Annually Report</div>
+                    </div>
+                </a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="card gradient-45deg-red-pink border-radius-3">
+            <div class="card-content center">
+             <a href="{% url 'tracker:analytics'%}/{{current_year}}/{{current_month}}">
+                    <div class="dashboard-card monthly-report">
+                        <div class="white-text">Monthly Report</div>
+                    </div>
+                </a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="card gradient-45deg-light-blue-cyan border-radius-3">
+            <div class="card-content center">
+             <a href="{% url 'tracker:analytics'%}/{{current_year}}/{{current_month}}/{{current_day}}">
+                    <div class="dashboard-card daily-report">
+                        <div class="white-text">Daily Report</div>
+                    </div>
+                </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
 </div>
 
 {% endblock %}
