@@ -4,35 +4,36 @@
     <meta charset="UTF-8">
     <title>Squirrel</title>
     {% load staticfiles %}
-    {% load bootstrap3 %}
+    <!--{% load bootstrap3 %}-->
 
     <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-    {% bootstrap_javascript %}
+    <!--{% bootstrap_javascript %}-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="{% static 'main.js' %}"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-    {% bootstrap_css %}
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}" />
 
 </head>
 <body>
-    <nav class="navbar">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{% url 'tracker:expense' %}">Squirrel</a>
-        </div>
-        {% if user.is_authenticated %}
-        <div class="collapse navbar-collapse" id="navbar">
-            <ul class="nav navbar-nav">
-                <li>
+<header id="header" class="page-topbar">
+ <div class="navbar-fixed">
+    <nav class="navbar gradient-45deg-purple-deep-purple">
+      <div class="nav-wrapper">
+        <a class="navbar-brand" href="{% url 'tracker:expense' %}">Squirrel</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {% if user.is_authenticated %}
+              <li>
                     <a href="{% url 'tracker:dashboard' %}">
                         <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp; Dashboard
                     </a>
@@ -47,20 +48,17 @@
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Expense
                     </a>
                 </li>
-            </ul>
-            {% endif%}
-            <ul class="nav navbar-nav navbar-right">
-                {% if user.is_authenticated %}
-                     <li><a href="{% url 'profile'%}">{{ user.get_username }}</a></li>
-                     <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
-                {% else %}
+                <li><a href="{% url 'profile'%}">{{ user.get_username }}</a></li>
+                <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+              {% else %}
                      <li><a href="{% url 'login'%}?next={{request.path}}">Register</a></li>
                      <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
                 {% endif %}
-            </ul>
-        </div>
-    </div>
-</nav>
+          </ul>
+      </div>
+    </nav>
+  </div>
+</header>
 
     {% block body %}
     {% endblock %}
