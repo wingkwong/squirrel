@@ -1,4 +1,6 @@
 # Squirrel
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwingkwong%2Fsquirrel.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwingkwong%2Fsquirrel?ref=badge_shield)
+
 
 ![](https://preview.ibb.co/b7GTNS/image.png)
 
@@ -107,3 +109,5 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=''# SecretKey
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwingkwong%2Fsquirrel.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwingkwong%2Fsquirrel?ref=badge_large)
