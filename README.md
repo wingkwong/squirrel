@@ -35,6 +35,7 @@ A responsive web application for expense tracking and analytics platform powered
 * ``/accounts/login``
 * ``/accounts/logout``
 * ``/accounts/profile/{id}``
+* ``/dashboard``
 * ``/auth/``
 * ``/admin/``
 
