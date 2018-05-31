@@ -9,6 +9,9 @@ def saveAvatar(backend, strategy, details, response,
         url = response['image'].get('url')
         ext = url.split('.')[-1]
     if url:
-        user = User.objects.get(username=details['username'])
-        user.profile.avatar = url
-        user.save()
+        try:
+            user = User.objects.get(username=details['username'])
+            user.profile.avatar = url
+            user.save()
+        except User.DoesNotExist:
+            user = None
