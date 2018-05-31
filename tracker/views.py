@@ -50,7 +50,7 @@ class Dashboard():
         # sum up all the expenses in this month
         total_expenses_in_this_month = exp.filter(created_at__month=current_month).aggregate(amount=Sum('amount'))['amount']
         if total_expenses_in_this_month is None:
-            total_expenses = 0
+            total_expenses_in_this_month = 0
 
         # sum up all the expenses in last month
         total_expenses_in_last_month = exp.filter(created_at__month=last_month).aggregate(amount=Sum('amount'))['amount']
