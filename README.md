@@ -70,15 +70,19 @@ Accounts:
 
 ## Setup Your Environment
 1. Fork this project
-2. Make Migrations
+2. Install from the given requirements file.
+```bash
+pip install -r requirements.txt
+```
+3. Make Migrations
 ```bash
 python manage.py makemigrations
 ```
-3. Migrate
+4. Migrate
 ```bash
 python manage.py migrate
 ```
-4. Run
+5. Run
 ```bash
 python manage.py runserver
 ```
