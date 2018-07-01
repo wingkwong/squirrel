@@ -59,7 +59,7 @@ class Dashboard():
 
         # get all categories
         categories = list(exp.values('type').distinct().order_by('type').values_list('type', flat=True))
-        print(categories)
+
         # get categories record count
         categories_record_cnt = list(exp.values('type').annotate(the_count=Count('type')).order_by('type').values_list('the_count', flat=True))
 
@@ -328,6 +328,7 @@ class AnalyticsView(generic.ListView):
                             .values_list('type', flat=True))
 
         lastday = monthrange(year, month)[1]
+
         days = list(range(1,lastday+1))
 
         for type in expense_type:
@@ -347,16 +348,14 @@ class AnalyticsView(generic.ListView):
 
             # init array
             daily_expense_cnt = [0] * lastday
-
             for i, m in enumerate(arr):
-                daily_expense_cnt[m.date.day] += m.amount
+                daily_expense_cnt[m.date.day - 1] += m.amount
 
             total_amount = []
-
             for j, k in enumerate(daily_expense_cnt[1:]):
                 o = {}
                 o['x'] = days[j];
-                o['y'] = daily_expense_cnt[j+1];
+                o['y'] = daily_expense_cnt[j];
                 total_amount.append(o)
 
             # generate random color
