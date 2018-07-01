@@ -19,22 +19,28 @@
      background: -webkit-linear-gradient(45deg, #7b1fa2 0%, #7c4dff 100%);
      background: linear-gradient(45deg, #7b1fa2 0%, #7c4dff 100%);
 }
-/* Global */
- body{
-     background: #f9f9f9
+
+/*
+    Override
+*/
+
+nav ul a {
+    font-size: 18px;
 }
+
 /* Navbar */
  .navbar-brand{
      padding: 30px;
-     font-size:20px;
-     font-family: Arial, Helvetica, sans-serif;
+     font-size:40px;
+     font-family: 'Dancing Script', Georgia, Times, serif;
 }
 /* Landing */
 /*-------------------------------------------------------------- #General --------------------------------------------------------------*/
  body{
      background:#fff;
      color:#666666;
-     font-family:"OpenSans",sans-serif;
+     font-size: 18px;
+     font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;
      overflow-x:hidden;
 }
  a{
@@ -444,7 +450,7 @@
 .loginBtn--google:hover,
 .loginBtn--google:focus {
   background: #E74B37;
-}   
+}
 
 /* Filter Panel --------------------------------*/
 .filterPanel {
