@@ -24,9 +24,13 @@
     Override
 */
 
-nav ul a {
+nav ul a,
+.input-field>label,
+label{
     font-size: 18px;
 }
+
+
 
 /* Navbar */
  .navbar-brand{
