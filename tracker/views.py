@@ -35,12 +35,21 @@ class Dashboard():
         # count total record in this month
         current_month = now.month
         total_records_in_this_month = exp.filter(created_at__month=current_month).count()
+        if total_records_in_this_month is None:
+            total_records_in_this_month = 0
 
         # count total record in last month
         last_month = now.month - 1
         if last_month<0:
             last_month = 11
         total_records_in_last_month = exp.filter(created_at__month=last_month).count()
+        if total_records_in_last_month is None:
+            total_records_in_last_month = 0
+
+        print(total_records_in_this_month)
+        print(total_records_in_last_month)
+        # diff between this month and last month
+        total_records_diff = ( (total_records_in_this_month - total_records_in_last_month) / total_records ) * 100
 
         # sum up all the expenses
         total_expenses = exp.aggregate(amount=Sum('amount'))['amount']
@@ -56,6 +65,9 @@ class Dashboard():
         total_expenses_in_last_month = exp.filter(created_at__month=last_month).aggregate(amount=Sum('amount'))['amount']
         if total_expenses_in_last_month is None:
             total_expenses_in_last_month = 0
+
+        # diff between this month and last month
+        total_expenses_diff = ( (total_expenses_in_this_month - total_expenses_in_last_month) / total_expenses ) * 100
 
         # get all categories
         categories = list(exp.values('type').distinct().order_by('type').values_list('type', flat=True))
@@ -87,6 +99,9 @@ class Dashboard():
         categories_in_last_month = exp.filter(created_at__month=last_month).values('type').annotate(the_count=Count('type')).count()
         if categories_in_last_month is None:
             categories_in_last_month = 0
+
+        # diff between this month and last month
+        total_categories_diff = ((categories_in_this_month - categories_in_last_month) / categories_cnt) * 100
 
         # list out dates for the following processing.
         dates = list(exp.values('date')
@@ -148,7 +163,10 @@ class Dashboard():
             'totalExpensesInThisMonth': float("{0:.2f}".format(total_expenses_in_this_month)),
             'totalExpensesInLastMonth': float("{0:.2f}".format(total_expenses_in_last_month)),
             'categories_in_this_month': categories_in_this_month,
-            'categories_in_last_month': categories_in_last_month
+            'categories_in_last_month': categories_in_last_month,
+            'total_expenses_diff': float("{0:.2f}".format(total_expenses_diff)),
+            'total_records_diff': float("{0:.2f}".format(total_records_diff)),
+            'total_categories_diff': float("{0:.2f}".format(total_categories_diff))
 
         }
 

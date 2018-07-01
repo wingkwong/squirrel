@@ -1,4 +1,5 @@
 {% extends 'tracker/base.html'%}
+
 {% block body %}
 <div class="dashboard">
     {% if context_type == 'dashboard'%}
@@ -11,8 +12,13 @@
                             Total Records</p>
                         <h4 class="card-stats-number">{{total_records}}</h4>
                         <p class="card-stats-compare">
-                            <i class="material-icons">keyboard_arrow_up</i> 15% (TODO)
-                            <span class="cyan text text-lighten-5">from yesterday</span>
+                            {% if total_expenses_diff > 0 %}
+                            <i class="material-icons">keyboard_arrow_up</i> {{total_records_diff | stringformat:"+d" | slice:"1:"}}%
+                            {% endif %}
+                            {% if total_expenses_diff < 0 %}
+                            <i class="material-icons">keyboard_arrow_down</i> {{total_records_diff | stringformat:"+d" | slice:"1:"}}%
+                            {% endif %}
+                            <span class="cyan text text-lighten-5">from last month</span>
                         </p>
                     </div>
                     <div class="card-action cyan white-text">
@@ -31,8 +37,13 @@
                             Total Expenses</p>
                         <h4 class="card-stats-number">${{total_expenses}}</h4>
                         <p class="card-stats-compare">
-                            <i class="material-icons">keyboard_arrow_up</i> 70% (TODO)
-                            <span class="red-text text-lighten-5">last month</span>
+                            {% if total_expenses_diff > 0 %}
+                            <i class="material-icons">keyboard_arrow_up</i> {{total_expenses_diff | stringformat:"+d" | slice:"1:"}}%
+                            {% endif %}
+                            {% if total_expenses_diff < 0 %}
+                            <i class="material-icons">keyboard_arrow_down</i> {{total_expenses_diff | stringformat:"+d" | slice:"1:"}}%
+                            {% endif %}
+                            <span class="red-text text-lighten-5">from last month</span>
                         </p>
                     </div>
                     <div class="card-action red white-text">
@@ -51,8 +62,13 @@
                             Total Categories</p>
                         <h4 class="card-stats-number">{{categories_cnt}}</h4>
                         <p class="card-stats-compare">
-                            <i class="material-icons">keyboard_arrow_up</i> 80% (TODO)
-                            <span class="teal-text text-lighten-5">from last month</span>
+                            {% if total_expenses_diff > 0 %}
+                            <i class="material-icons">keyboard_arrow_up</i> {{total_categories_diff | stringformat:"+d" | slice:"1:"}}%
+                            {% endif %}
+                            {% if total_expenses_diff < 0 %}
+                            <i class="material-icons">keyboard_arrow_down</i> {{total_categories_diff | stringformat:"+d" | slice:"1:"}}%
+                            {% endif %}
+                             <span class="red-text text-lighten-5">from last month</span>
                         </p>
                     </div>
                     <div class="card-action teal white-text">
@@ -69,10 +85,10 @@
                     <div class="card-content deep-orange accent-2 white-text">
                         <p class="card-stats-title">
                             Avg. year</p>
-                        <h4 class="card-stats-number">{{avg_year}}</h4>
+                        <h4 class="card-stats-number">${{avg_year}}</h4>
                         <p class="card-stats-compare">
-                            <i class="material-icons">keyboard_arrow_down</i> 3%
-                            <span class="deep-orange-text text-lighten-5">from last month</span>
+                            <i class="material-icons">dashboard</i>
+                            <span class="deep-orange-text text-lighten-5"> </span>
                         </p>
                     </div>
                     <div class="card-action  deep-orange white-text">
