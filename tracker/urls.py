@@ -6,7 +6,7 @@ app_name = 'tracker'
 
 urlpatterns = [
 	# /
-    path('', views.landingView.landing, name ="landing"),
+    path('', views.LandingView.landing, name ="landing"),
 
     # /dashboard
     path('dashboard', login_required(views.Dashboard.index), name="dashboard"),
@@ -22,6 +22,9 @@ urlpatterns = [
 
     # /delete/{id}
     path('tracker/delete/<int:pk>', login_required(views.ExpenseDelete.as_view()), name="delete_expense"),
+
+    # /export
+    path('tracker/export', login_required(views.ReportView.export), name="export"),
 
     # /analytics
     # FIXME: redirect to dashboard

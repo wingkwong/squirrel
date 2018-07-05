@@ -10,8 +10,10 @@ from .models import Expense
 from .forms import ExpenseTableHelper
 from .filters import ExpenseFilter
 from .utils import AmountUnitUtil
-import random
+from django.http import HttpResponse
 from calendar import monthrange
+import csv
+import random
 import datetime
 
 
@@ -225,6 +227,7 @@ class ExpenseUpdate(UpdateView):
         'payment',
         'amount'
     ]
+
 
 # obsolete
 class ExpenseDelete(DeleteView):
@@ -503,7 +506,22 @@ class AnalyticsView(generic.ListView):
         return render(request, "analytics/index.html", context)
 
 
-class landingView():
+class LandingView():
     def landing(request):
         context = {}
         return render(request, "landing/index.html", context)
+
+
+class ReportView():
+    def export(request):
+        exp = Expense.objects.filter(created_by=request.user).order_by('id')
+        opts = exp.model._meta
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment;filename=export.csv'
+        writer = csv.writer(response)
+        field_names = [field.name for field in opts.fields]
+        # writer.writerow(field_names)
+        for obj in exp:
+            writer.writerow([getattr(obj, field) for field in field_names])
+        return response
+
