@@ -1,28 +1,24 @@
 {% extends 'tracker/base.html'%}
-
-<!--{% load render_table from django_tables2 %}-->
 {% load django_tables2 crispy_forms_tags %}
-{% load bootstrap3 %}
-
 
 {% block body %}
 <div class="container expense-overview">
-{% buttons %}
     <button type="submit" class="open-filter-btn btn btn-success">
-      {% bootstrap_icon "search" %} Filter
+      Filter
     </button>
-  {% endbuttons %}
 
-
+    <button type="submit" class="open-filter-btn btn btn-success">
+      Export
+    </button>
 
     {% render_table table %}
 
-<div id="filterPanel" class="filterPanel">
-  <a href="javascript:void(0)" class="closebtn">&times;</a>
-      <form action="" method="get">
-    {% crispy filter.form filter.form.helper %}
-    </form>
-</div>
+    <div id="filterPanel" class="filterPanel">
+      <a href="javascript:void(0)" class="closebtn">&times;</a>
+          <form action="" method="get">
+        {% crispy filter.form filter.form.helper %}
+        </form>
+    </div>
 
 {% endblock %}
 </div>
