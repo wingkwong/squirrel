@@ -12,6 +12,7 @@ from .filters import ExpenseFilter
 from .utils import AmountUnitUtil
 from django.http import HttpResponse
 from calendar import monthrange
+from .forms import AddExpenseForm
 import csv
 import random
 import datetime
@@ -199,16 +200,8 @@ class IndexView(generic.ListView):
 
 
 class ExpenseCreate(CreateView):
-    # TODO: add datepicker
-
     model = Expense
-    fields = [
-        'date',
-        'description',
-        'type',
-        'payment',
-        'amount'
-    ]
+    form_class = AddExpenseForm
 
     def form_valid(self, form):
         obj = form.save(commit=False)
