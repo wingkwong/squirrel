@@ -1,4 +1,6 @@
-{% block content %}
+{% include 'tracker/base.html' %}
+
+{% block body %}
   <h2>Register</h2>
   <form method="post">
     {% csrf_token %}
