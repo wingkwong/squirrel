@@ -52,7 +52,10 @@ class Dashboard():
         print(total_records_in_this_month)
         print(total_records_in_last_month)
         # diff between this month and last month
-        total_records_diff = ( (total_records_in_this_month - total_records_in_last_month) / total_records ) * 100
+        if total_records == 0:
+            total_records_diff = 0
+        else:
+            total_records_diff = ( (total_records_in_this_month - total_records_in_last_month) / total_records ) * 100
 
         # sum up all the expenses
         total_expenses = exp.aggregate(amount=Sum('amount'))['amount']
@@ -70,7 +73,10 @@ class Dashboard():
             total_expenses_in_last_month = 0
 
         # diff between this month and last month
-        total_expenses_diff = ( (total_expenses_in_this_month - total_expenses_in_last_month) / total_expenses ) * 100
+        if total_expenses == 0:
+            total_expenses_diff = 0
+        else:
+            total_expenses_diff = ( (total_expenses_in_this_month - total_expenses_in_last_month) / total_expenses ) * 100
 
         # get all categories
         categories = list(exp.values('type').distinct().order_by('type').values_list('type', flat=True))
@@ -104,7 +110,10 @@ class Dashboard():
             categories_in_last_month = 0
 
         # diff between this month and last month
-        total_categories_diff = ((categories_in_this_month - categories_in_last_month) / categories_cnt) * 100
+        if categories_cnt == 0:
+            total_categories_diff = 0
+        else:
+            total_categories_diff = ((categories_in_this_month - categories_in_last_month) / categories_cnt) * 100
 
         # list out dates for the following processing.
         dates = list(exp.values('date')
@@ -153,9 +162,9 @@ class Dashboard():
             'categories_cnt': categories_cnt,
             'categories_expense': categories_expense,
             'categories_color_arr': categories_color_arr,
-            'avg_year': avg_year,
-            'avg_month': avg_month,
-            'avg_day': avg_day,
+            'avg_year': float("{0:.2f}".format(avg_year)),
+            'avg_month': float("{0:.2f}".format(avg_month)),
+            'avg_day': float("{0:.2f}".format(avg_day)),
             'current_year': now.year,
             'current_month': now.month,
             'current_day': now.day,
