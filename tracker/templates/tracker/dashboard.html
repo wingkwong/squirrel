@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col s12 m6 l3">
                 <div class="card">
-                    <div class="card-content cyan white-text">
+                    <div class="card-content">
                         <p class="card-stats-title">
                             Total Records</p>
                         <h4 class="card-stats-number">{{total_records}}</h4>
@@ -18,10 +18,10 @@
                             {% if total_expenses_diff < 0 %}
                             <i class="material-icons">keyboard_arrow_down</i> {{total_records_diff | stringformat:"+d" | slice:"1:"}}%
                             {% endif %}
-                            <span class="cyan text text-lighten-5">from last month</span>
+                            <span class="">from last month</span>
                         </p>
                     </div>
-                    <div class="card-action cyan white-text">
+                    <div class="card-action">
                         <div class="this-month col m6">This month:</div>
                         <div>{{totalRecordsInThisMonth}}</div>
                         <div class="last-month col m6">Last month:</div>
@@ -32,7 +32,7 @@
 
             <div class="col s12 m6 l3">
                 <div class="card">
-                    <div class="card-content red accent-2 white-text">
+                    <div class="card-content">
                         <p class="card-stats-title">
                             Total Expenses</p>
                         <h4 class="card-stats-number">${{total_expenses}}</h4>
@@ -43,10 +43,10 @@
                             {% if total_expenses_diff < 0 %}
                             <i class="material-icons">keyboard_arrow_down</i> {{total_expenses_diff | stringformat:"+d" | slice:"1:"}}%
                             {% endif %}
-                            <span class="red-text text-lighten-5">from last month</span>
+                            <span class="">from last month</span>
                         </p>
                     </div>
-                    <div class="card-action red white-text">
+                    <div class="card-action">
                         <div class="this-month col m6">This month:</div>
                         <div>${{totalExpensesInThisMonth}}</div>
                         <div class="last-month col m6">Last month:</div>
@@ -57,7 +57,7 @@
 
             <div class="col s12 m6 l3">
                 <div class="card">
-                    <div class="card-content teal accent-4 white-text">
+                    <div class="card-content">
                         <p class="card-stats-title">
                             Total Categories</p>
                         <h4 class="card-stats-number">{{categories_cnt}}</h4>
@@ -68,10 +68,10 @@
                             {% if total_expenses_diff < 0 %}
                             <i class="material-icons">keyboard_arrow_down</i> {{total_categories_diff | stringformat:"+d" | slice:"1:"}}%
                             {% endif %}
-                             <span class="red-text text-lighten-5">from last month</span>
+                             <span class="">from last month</span>
                         </p>
                     </div>
-                    <div class="card-action teal white-text">
+                    <div class="card-action">
                         <div class="this-month col m6">This month:</div>
                         <div>{{categories_in_this_month}}</div>
                         <div class="last-month col m6">Last month:</div>
@@ -82,16 +82,16 @@
 
             <div class="col s12 m6 l3">
                 <div class="card">
-                    <div class="card-content deep-orange accent-2 white-text">
+                    <div class="card-content">
                         <p class="card-stats-title">
                             Avg. year</p>
                         <h4 class="card-stats-number">${{avg_year}}</h4>
                         <p class="card-stats-compare">
                             <i class="material-icons">dashboard</i>
-                            <span class="deep-orange-text text-lighten-5"> </span>
+                            <span class=""> </span>
                         </p>
                     </div>
-                    <div class="card-action  deep-orange white-text">
+                    <div class="card-action">
                         <div class="this-month col m6">Avg. month:</div>
                         <div>${{avg_month}}</div>
                         <div class="last-month col m6">Avg. day:</div>
@@ -108,7 +108,7 @@
             <div class="col s12 m6 7">
                 <div class="card">
                     <div class="card-move-up waves-effect waves-block waves-light">
-                        <div class="move-up cyan darken-1">
+                        <div class="move-up">
                             <div>
                                 <canvas id="allCategories" class="allCategories"></canvas>
                                 <script>
@@ -151,9 +151,9 @@
 
             <div class="col s12 m6 7">
                 <div class="card">
-                    <div class="card-move-up teal accent-4 waves-effect waves-block waves-light">
-                        <div class="move-up card-content teal">
-                            <p class="margin white-text">Expenses per Categories</p>
+                    <div class="card-move-up">
+                        <div class="move-up card-content ">
+                            <p class="margin">Expenses per Categories</p>
                             <canvas id="allCategoriesRadar" class="allCategoriesRadar"></canvas>
                             <script>
                                 var ctx = document.getElementById("allCategoriesRadar").getContext('2d');
@@ -228,7 +228,7 @@
         <div class="row">
             <div class="col m12">
                 <div class="card">
-                    <div class="card-move-up teal accent-4 waves-effect waves-block waves-light">
+                    <div class="card-move-up ">
                                         <canvas id="latest30DaysExpense" class="latest30DaysExpense" width="500" height="100"></canvas>
                 <script>
                                 var ctx = document.getElementById("latest30DaysExpense").getContext('2d');
@@ -286,22 +286,22 @@
     <section>
         <div class="row">
         <div class="col s12 m4">
-          <div class="card gradient-45deg-purple-deep-orange border-radius-3">
+          <div class="card  border-radius-3">
             <div class="card-content center">
               <a href="{% url 'tracker:analytics'%}/{{current_year}}">
                     <div class="dashboard-card annually-report">
-                        <div class="white-text">Annually Report</div>
+                        <div class="">Annually Report</div>
                     </div>
                 </a>
             </div>
           </div>
         </div>
         <div class="col s12 m4">
-          <div class="card gradient-45deg-red-pink border-radius-3">
+          <div class="card  border-radius-3">
             <div class="card-content center">
              <a href="{% url 'tracker:analytics'%}/{{current_year}}/{{current_month}}">
                     <div class="dashboard-card monthly-report">
-                        <div class="white-text">Monthly Report</div>
+                        <div class="">Monthly Report</div>
                     </div>
                 </a>
             </div>
@@ -312,7 +312,7 @@
             <div class="card-content center">
              <a href="{% url 'tracker:analytics'%}/{{current_year}}/{{current_month}}/{{current_day}}">
                     <div class="dashboard-card daily-report">
-                        <div class="white-text">Daily Report</div>
+                        <div class="">Daily Report</div>
                     </div>
                 </a>
             </div>
