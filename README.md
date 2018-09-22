@@ -18,7 +18,6 @@ A responsive web application for expense tracking and analytics platform powered
 * tracker.apps.TrackerConfig
 * django_tables2
 * django_filters
-* bootstrap3
 * crispy_forms
 * tracker.templatetags.month_labels
 * social_django
@@ -61,32 +60,32 @@ Accounts:
 
 * Responsive
 * Expense Overview with filtering
-* Expense addition
+* Expense Addition
 * Expense Analytics by year, month or day
 * Google OAuth2
 
 ## Prerequisites
 
 - Python >= 3.5
-- pip
+- pip3
 
 ## Setup Your Environment
 1. Fork this project
 2. Install from the given requirements file.
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 3. Make Migrations
 ```bash
-python manage.py makemigrations
+python3 manage.py makemigrations
 ```
 4. Migrate
 ```bash
-python manage.py migrate
+python3 manage.py migrate
 ```
 5. Run
 ```bash
-python manage.py runserver
+python3 manage.py runserver
 ```
 
 ## Setup Your Google OAuth
