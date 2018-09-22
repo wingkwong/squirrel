@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'django_tables2',
     'django_filters',
-    'bootstrap3',
     'crispy_forms',
     'tracker.templatetags.month_labels',
     'social_django'
@@ -79,7 +78,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'website.wsgi.application'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases

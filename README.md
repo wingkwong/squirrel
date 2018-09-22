@@ -59,11 +59,10 @@ Accounts:
 
 ## Features:
 
-* Responsive 
+* Responsive
 * Expense Overview with filtering
 * Expense addition
 * Expense Analytics by year, month or day
-* Bootstrap 3 based
 * Google OAuth2
 
 ## Prerequisites

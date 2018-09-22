@@ -24,5 +24,4 @@ class ExpenseTable(tables.Table):
             )
         attrs = {"class": "table table-striped dt-responsive nowrap"}
         empty_text = "No records found"
-        template_name = 'django_tables2/bootstrap-responsive.html'
-
+        # template_name = 'django_tables2/bootstrap-responsive.html'
