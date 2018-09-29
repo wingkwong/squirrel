@@ -1,9 +1,6 @@
 # Squirrel
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwingkwong%2Fsquirrel.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwingkwong%2Fsquirrel?ref=badge_shield)
 
-
-![](https://preview.ibb.co/b7GTNS/image.png)
-
 ## About
 A responsive web application for expense tracking and analytics platform powered by Django
 
