@@ -5,8 +5,15 @@
 .card-panel,
 .collection a.collection-item,
 .navbar {
-    background-color: #282828;
-    color: #ffc900;
+    background-color: #fff;
+    color: #667d89;
+}
+
+nav a,
+nav ul a,
+tr a,
+.login a {
+  color: #333;
 }
 
 nav ul a,
@@ -22,17 +29,18 @@ label{
 .btn, .btn-large, .btn-small,
  .btn:hover, .btn-large:hover, .btn-small:hover,
   .btn:focus, .btn-large:focus, .btn-small:focus{
-    background-color: #ffc900;
-    color: #282828;
+    background-color: #667d89;
+    color: #fff;
 }
 
 input,
  input:focus{
-    color: #ffc900;
-    border-bottom: 1px solid #ffc900 !important;
+    color: #667d89;
+    border-bottom: 1px solid #667d89 !important;
 }
 .card {
-    background: #292929;
+    background: #667d99;
+    color: #fff;
 }
 
 /* Navbar */
@@ -44,14 +52,14 @@ input,
 /* Landing */
 /*-------------------------------------------------------------- #General --------------------------------------------------------------*/
  body{
-    background-color: #282828;
-    color: #ffc900;
+    background-color: #fff;
+    color: #667d89;
      font-size: 18px;
      font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;
      overflow-x:hidden;
 }
  a{
-     color:#fce9a4;
+     color:#fff;
 }
 /* a:hover,a:active,a:focus{
      color:#fff;
@@ -81,7 +89,7 @@ input,
  #intro{
      width:100%;
      height:100%;
-     background-color:#282828;
+     background-color:#fff;
      position:relative;
      margin-top:-20px;
 }
