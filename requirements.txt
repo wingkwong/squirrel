@@ -1,6 +1,6 @@
 django_tables2==1.19.0
 django_filter==1.1.0
-Django==2.0.2
+Django==2.0.8
 django_crispy_forms==1.7.2
 django_filters==0.2.1
 social-auth-app-django

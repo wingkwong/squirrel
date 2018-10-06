@@ -5,7 +5,7 @@
 A responsive web application for expense tracking and analytics platform powered by Django
 
 ## Installed apps:
-* django 2.0.2
+* django 2.0.8
 * django.contrib.admin
 * django.contrib.auth
 * django.contrib.contenttypes
