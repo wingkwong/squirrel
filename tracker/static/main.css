@@ -12,7 +12,8 @@
 nav a,
 nav ul a,
 tr a,
-.login a {
+.login a,
+.pagination li a {
   color: #ffffff;
 }
 
@@ -20,6 +21,10 @@ nav ul a,
 .input-field>label,
 label{
     font-size: 18px;
+}
+
+td, th {
+  padding: 0px;
 }
 
 .container {
@@ -220,4 +225,30 @@ input,
     font-size: 36px;
     margin-left: 50px;
     color: #1a1a1ffff;
+}
+
+.expense-overview tr {
+  background-color: #1a1a1f;
+  border-color: #ffffff;
+}
+
+.expense-overview td,
+.expense-overview th{
+  padding: 5px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.add-expense-form {
+  border-radius: 15px;
+  padding: 48px 24px 24px 24px;
+}
+
+.add-expense-form .row {
+  margin-bottom: 12px;
+}
+
+.add-expense-form .row .col{
+  margin: 0px;
+  padding: 0px 10px;
 }
