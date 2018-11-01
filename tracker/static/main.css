@@ -48,6 +48,22 @@ input,
     color: #ffffff;
 }
 
+.collection .collection-item,
+.collection .collection-item.active {
+    background-color: #1a1a1f;
+    color: #ffffff;
+}
+
+.collection a.collection-item:not(.active):hover,
+.collection a.collection-item {
+    background-color: #323237;
+    color: #ffffff;
+}
+
+span.badge {
+    color: #ffffff;
+}
+
 /* Navbar */
  .navbar-brand{
      padding: 30px 30px 30px 15px;
